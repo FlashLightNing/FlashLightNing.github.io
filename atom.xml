@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>大家</title>
+  <title>主页</title>
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://FlashLightNing.github.io/"/>
   <updated>2016-04-05T09:35:16.656Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://FlashLightNing.github.io/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>mingfeng lu</name>
     
   </author>
   
@@ -17,8 +17,8 @@
   
   <entry>
     <title>hexo&#39;</title>
-    <link href="http://yoursite.com/2016/04/05/hexo/"/>
-    <id>http://yoursite.com/2016/04/05/hexo/</id>
+    <link href="http://FlashLightNing.github.io/2016/04/05/hexo/"/>
+    <id>http://FlashLightNing.github.io/2016/04/05/hexo/</id>
     <published>2016-04-05T09:33:50.000Z</published>
     <updated>2016-04-05T09:35:16.656Z</updated>
     
@@ -35,8 +35,8 @@
   
   <entry>
     <title>article&#39;</title>
-    <link href="http://yoursite.com/2016/04/05/article/"/>
-    <id>http://yoursite.com/2016/04/05/article/</id>
+    <link href="http://FlashLightNing.github.io/2016/04/05/article/"/>
+    <id>http://FlashLightNing.github.io/2016/04/05/article/</id>
     <published>2016-04-05T05:15:27.000Z</published>
     <updated>2016-04-05T05:23:16.991Z</updated>
     
@@ -55,8 +55,8 @@
   
   <entry>
     <title></title>
-    <link href="http://yoursite.com/2016/04/05/he/"/>
-    <id>http://yoursite.com/2016/04/05/he/</id>
+    <link href="http://FlashLightNing.github.io/2016/04/05/he/"/>
+    <id>http://FlashLightNing.github.io/2016/04/05/he/</id>
     <published>2016-04-05T05:13:18.624Z</published>
     <updated>2016-04-05T05:13:31.848Z</updated>
     
@@ -75,8 +75,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2016/04/05/hello-world/"/>
-    <id>http://yoursite.com/2016/04/05/hello-world/</id>
+    <link href="http://FlashLightNing.github.io/2016/04/05/hello-world/"/>
+    <id>http://FlashLightNing.github.io/2016/04/05/hello-world/</id>
     <published>2016-04-05T03:38:07.661Z</published>
     <updated>2016-04-05T03:38:07.661Z</updated>
     
