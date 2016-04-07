@@ -64,9 +64,9 @@ var _hmt = _hmt || [];
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://FlashLightNing.github.io"></form>
@@ -101,7 +101,7 @@ var _hmt = _hmt || [];
       
         <p><strong>离散时间混沌序列图像加密解密大致有以下几个步骤:</strong></p>
 <ul>
-<li><a href="http://baike.baidu.com/link?url=DJKZliiFPW-M_9jVWjt99glbS0RryObOFWuA6Nt2ZN-SfzdE3VNYO5jqgShK5ob0EJ9GGqlG0ncFhmWzaqGpu_" target="_blank" rel="external">猫脸映射(也叫Arnold变换)</a></li>
+<li><a href="http://baike.baidu.com/link?url=DJKZliiFPW-M_9jVWjt99glbS0RryObOFWuA6Nt2ZN-SfzdE3VNYO5jqgShK5ob0EJ9GGqlG0ncFhmWzaqGpu_">猫脸映射(也叫Arnold变换)</a></li>
 <li>混沌加密</li>
 <li>混沌解密</li>
 <li>猫脸逆映射</li>
@@ -113,22 +113,15 @@ var _hmt = _hmt || [];
 <li><strong>ImageIO.read(File file) =null的情况，但是图片文件却又是真实存在</strong></li>
 <li><strong>循环迭代猫脸映射的时候，用数组1=数组2的方式，使得两个数组的引用是一样的，而导致修改数组1引起数组2的改变，然后发现映射出错。</strong></li>
 </ul>
-<h2 id="处理思路"><a href="#处理思路" class="headerlink" title="处理思路"></a>处理思路</h2><p> <strong>主要涉及了Java的图像处理方面的API，如读取图像，读取图像像素数组：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">       BufferedImage image = ImageIO.read(<span class="keyword">new</span> File(imgPath));</span><br><span class="line">			N = image.getWidth();</span><br><span class="line">			array = <span class="keyword">new</span> <span class="keyword">double</span>[N][N];</span><br><span class="line">			rgbArray = <span class="keyword">new</span> <span class="keyword">int</span>[N * N + <span class="number">2</span>];</span><br><span class="line"><span class="comment">//从(0,0)开始，宽度为N,高度N（猫脸映射要求长宽一致）,offset=0</span></span><br><span class="line">			rgbArray = image.getRGB(<span class="number">0</span>, <span class="number">0</span>, N, N, rgbArray, <span class="number">0</span>, N);</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line"></span><br><span class="line">					Color color = <span class="keyword">new</span> Color(rgbArray[j * N + i]);</span><br><span class="line">					array[i][j] = color.getRed() / <span class="number">255.0</span>;</span><br><span class="line">				&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>将像素数组转为一张图片：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> public static void changeArrayToImage(double[][] array, String path,</span><br><span class="line">			String process) &#123;</span><br><span class="line">			//数组长度，即图片大小</span><br><span class="line">		int N = array.length;</span><br><span class="line">		System.out.println(process + &quot;:&quot; + N);</span><br><span class="line">		//TYPE_BYTE_GRAY表示是灰度图片</span><br><span class="line">		BufferedImage image = new BufferedImage(N, N,</span><br><span class="line">				BufferedImage.TYPE_BYTE_GRAY);</span><br><span class="line"></span><br><span class="line">		for (int i = 0; i &lt; N; i++)</span><br><span class="line">			for (int j = 0; j &lt; N; j++) &#123;</span><br><span class="line">			/*本来是从0-1的double型数组，将他变成0-255范围的像  </span><br><span class="line">  素值，选择让R=G=B=灰度值，根据这个生成了一个color对象，然后得到  </span><br><span class="line">这个对象的RGB值（在Java里面是一个整数，不同的位数表示不同的值）  </span><br><span class="line">，然后绘制在(X,Y)点。这样就完成了从像素数组到图片的过程*/</span><br><span class="line">				int gray = (int) (array[i][j] * 255);</span><br><span class="line">				</span><br><span class="line">				int rgb = new Color(gray, gray, gray).getRGB();</span><br><span class="line">				image.setRGB(i, j, rgb);</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		try &#123;</span><br><span class="line">			ImageIO.write(image, &quot;jpg&quot;, new File(path));</span><br><span class="line">		&#125; catch (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(process + &quot;:数组转换图片成功,路径:&quot; + path);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这两个方法在算法中用到比较多，因为我把每个步骤处理之后得到的数组都画成图片，这样可以直观的看到效果：<br>原图:<br><img src="http://7xsmif.com2.z0.glb.clouddn.com/image/java/lena.jpg" width="300" height="300"></p>
-<p>猫脸映射之后得到的图像<img src="http://7xsmif.com2.z0.glb.clouddn.com/image/java/after_arnoldChange_image_path.jpg" width="300" height="300"><br>这只是迭代了5次之后得到的效果，<strong>猫脸映射存在一定的周期，所以也不是迭代次数越大越好</strong><br>前面读取图像还有一个坑，就是<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BufferedImage image = ImageIO.read(new File(imgPath));</span><br></pre></td></tr></table></figure></p>
-<p>它只能读取常用的一些图片格式，如</p>
-<p>-<strong>BMP, bmp, jpg, JPG, wbmp,</strong></p>
-<ul>
-<li><strong>jpeg, png, PNG, JPEG, </strong></li>
-<li><strong>WBMP, GIF, gif.</strong><br>而<a href="http://baike.baidu.com/link?url=S4G2koOmL-zYfIaWKdn8OUy5fpQwPUcz7BanJdxcB6msMMT6Lk5q-kbDLPsO-qe-2gOR5fXhv6Imy3rR2MoBEWjKwObY1TLedhUcmCo-_vG" target="_blank" rel="external">tiff</a>格式的图片不能读取，因此会报<strong>ImageIO.read(new File(imgPath))=null</strong>的错误。而且有些后缀名是jpg的图片也不能，是因为它只是改了文件后缀而已，实际上还是tiff格式的图片。<h3 id="那么该怎么区分它们？怎么将tiff格式图片转为其他类型图片呢？"><a href="#那么该怎么区分它们？怎么将tiff格式图片转为其他类型图片呢？" class="headerlink" title="那么该怎么区分它们？怎么将tiff格式图片转为其他类型图片呢？"></a>那么该怎么区分它们？怎么将tiff格式图片转为其他类型图片呢？</h3>在下一篇博客里面贴出区分方法及代码</li>
-</ul>
-
+        
+          <p class="article-more-link">
+            <a href="/2016/04/07/混沌序列图像加密传输/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://FlashLightNing.github.io/2016/04/07/混沌序列图像加密传输/" data-id="cimqfplk70002lslzckv67djt" class="article-share-link">Partager</a>
+      <a data-url="http://FlashLightNing.github.io/2016/04/07/混沌序列图像加密传输/" data-id="cimqfrwpy000234lzhf4bkktf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像加密/">图像加密</a></li></ul>
@@ -171,7 +164,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://FlashLightNing.github.io/2016/04/07/About-Blog/" data-id="cimqfpljw0000lslzx72ozrjn" class="article-share-link">Partager</a>
+      <a data-url="http://FlashLightNing.github.io/2016/04/07/About-Blog/" data-id="cimqfrwq3000334lz931q0wkb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
@@ -209,7 +202,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://FlashLightNing.github.io/2016/04/05/hexo/" data-id="cimqfplkg0004lslztnzs37wl" class="article-share-link">Partager</a>
+      <a data-url="http://FlashLightNing.github.io/2016/04/05/hexo/" data-id="cimqfrwqn000a34lzxb01eem9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -250,7 +243,7 @@ var _hmt = _hmt || [];
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://FlashLightNing.github.io/2016/04/05/hello-world/" data-id="cimqfplki0005lslzoj3mlprj" class="article-share-link">Partager</a>
+      <a data-url="http://FlashLightNing.github.io/2016/04/05/hello-world/" data-id="cimqfrwpo000034lzpwwyrk49" class="article-share-link">Share</a>
       
       
     </footer>
@@ -270,7 +263,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图像加密/">图像加密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生活/">生活</a></li></ul>
     </div>
@@ -280,7 +273,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/图像加密/" style="font-size: 10px;">图像加密</a> <a href="/tags/生活/" style="font-size: 10px;">生活</a>
     </div>
@@ -299,7 +292,7 @@ var _hmt = _hmt || [];
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -332,7 +325,7 @@ var _hmt = _hmt || [];
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 mingfeng lu<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
