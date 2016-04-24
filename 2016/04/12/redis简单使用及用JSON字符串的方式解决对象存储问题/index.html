@@ -1,0 +1,575 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="入门,redis,json," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Boom" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;想在windows下使用熟悉一下redis，首先在它的github上下载压缩包：https://github.com/dmajkic/redis  下载到本地之后解压缩打开，里面有32位和64位2个文件夹，我的是64位系统，所以把64-bit文件夹里面的文件复制到最外层目录（D：/redis）下，然后就可以开始安装配置了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis简单使用及用JSON字符串的方式解决对象存储问题">
+<meta property="og:url" content="http://FlashLightNing.github.io/2016/04/12/redis简单使用及用JSON字符串的方式解决对象存储问题/index.html">
+<meta property="og:site_name" content="Boom">
+<meta property="og:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;想在windows下使用熟悉一下redis，首先在它的github上下载压缩包：https://github.com/dmajkic/redis  下载到本地之后解压缩打开，里面有32位和64位2个文件夹，我的是64位系统，所以把64-bit文件夹里面的文件复制到最外层目录（D：/redis）下，然后就可以开始安装配置了。">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2014/11/redis-win.jpg">
+<meta property="og:image" content="http://7xsmif.com2.z0.glb.clouddn.com/redis1.png">
+<meta property="og:updated_time" content="2016-04-12T13:14:15.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis简单使用及用JSON字符串的方式解决对象存储问题">
+<meta name="twitter:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;想在windows下使用熟悉一下redis，首先在它的github上下载压缩包：https://github.com/dmajkic/redis  下载到本地之后解压缩打开，里面有32位和64位2个文件夹，我的是64位系统，所以把64-bit文件夹里面的文件复制到最外层目录（D：/redis）下，然后就可以开始安装配置了。">
+<meta name="twitter:image" content="http://www.runoob.com/wp-content/uploads/2014/11/redis-win.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> redis简单使用及用JSON字符串的方式解决对象存储问题 | Boom </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Boom</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">黎明就在眼前</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                redis简单使用及用JSON字符串的方式解决对象存储问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-04-12T17:39:31+08:00" content="2016-04-12">
+              2016-04-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> &#160; &#160; &#160; &#160;想在windows下使用熟悉一下redis，首先在它的github上下载压缩包：<a href="https://github.com/dmajkic/redis" target="_blank" rel="external">https://github.com/dmajkic/redis</a>  下载到本地之后解压缩打开，里面有32位和64位2个文件夹，我的是64位系统，所以把64-bit文件夹里面的文件复制到最外层目录（D：/redis）下，然后就可以开始安装配置了。<br><a id="more"></a></p>
+<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a><strong>安装配置</strong></h2><p>打开cmd窗口，切换到安装目录下(D:/redis)，然后 运行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server.exe redis.conf</span><br></pre></td></tr></table></figure></p>
+<p> 它会显示如下类似的页面：<br> <img src="http://www.runoob.com/wp-content/uploads/2014/11/redis-win.jpg"><br> &#160; &#160; &#160; &#160; <strong>这时候，再打开一个cmd窗口，原先的不能关闭，不然就不能访问服务端了。</strong><br> 在另一个cmd窗口下：切换到redis目录，运行：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli.exe -h 127.0.0.1 -p 6379</span><br></pre></td></tr></table></figure></p>
+<p> 这样就算开启了客户端，然后可以在这个界面上设置一些键值对，简单的比如：<br><img src="http://7xsmif.com2.z0.glb.clouddn.com/redis1.png"><br> &#160; &#160; &#160; &#160;第一句直接连接报错：不能连接上127.0.0.1是因为服务端没开，也就是前面的 <strong>redis-server.exe redis.conf</strong>没有在另外一个窗口输入过 。后面再打开一个窗口输入即可，<br>这样就算是完成了安装配置也简单的测试了一下它的使用，比如设置key-value并取出，并没有问题。</p>
+<h2 id="eclipse中使用redis"><a href="#eclipse中使用redis" class="headerlink" title="eclipse中使用redis"></a><strong>eclipse中使用redis</strong></h2><p> &#160; &#160; &#160; &#160;昨天刚学了maven的使用，今天刚好试一下：<br>用昨天的方法，在 <a href="http://search.maven.org/" target="_blank" rel="external">http://search.maven.org/</a>  中查redis，得到它的maven配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.8.1&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>添加到pom.xml文件中即可，然后在程序中就可以使用啦~<br>比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Jedis edis = new Jedis(&quot;localhost&quot;);</span><br><span class="line">System.out.println(edis.ping());</span><br><span class="line">edis.set(&quot;name&quot;, &quot;redis&quot;);</span><br><span class="line">System.out.println(&quot;value=&quot; + edis.get(&quot;name&quot;));</span><br><span class="line"></span><br><span class="line">edis.lpush(&quot;nameList&quot;, &quot;redis&quot;);</span><br><span class="line">edis.lpush(&quot;nameList&quot;, &quot;yueda&quot;);</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; list = edis.lrange(&quot;nameList&quot;, 0, 5);</span><br><span class="line">for (int i = 0; i &lt; list.size(); i++) &#123;</span><br><span class="line">	System.out.println(list.get(i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 只是简单的试了一些string和list的方法。在程序中添加的key-value可以在cmd界面中get到。</p>
+<h2 id="redis存储对象"><a href="#redis存储对象" class="headerlink" title="redis存储对象"></a><strong>redis存储对象</strong></h2><p> &#160; &#160; &#160; &#160;在Java程序中，redis提供的方法插入的key,value要么是string,要么就是byte[]数组。那如果是要插入的value是个对象怎么办呢？网上的方法大多是对这个对象进行序列化。序列化还有一个作用是可以将对象序列化之后通过socket进行传输。那么，JSON也是一个进行数据交换的格式。何不将对象转为JSON字符串然后当作String存在Value中也是可以的。<br>我用的是alibaba的fastjson,得到它的坐标:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;fastjson&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;1.2.8&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>添加到pom.xml中就可以使用了：<br>新建一个POJO:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">package com.lumingfeng.hellomaven;</span><br><span class="line">public class Student &#123;</span><br><span class="line">	int age;</span><br><span class="line">	String name;</span><br><span class="line">	String address;</span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getAddress() &#123;</span><br><span class="line">		return address;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setAddress(String address) &#123;</span><br><span class="line">		this.address = address;</span><br><span class="line">	&#125;</span><br><span class="line">	public Student() &#123;</span><br><span class="line">	&#125;</span><br><span class="line">	public Student(int age, String name, String address) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.address = address;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Student [age=&quot; + age + &quot;, name=&quot; + name + &quot;, address=&quot;</span><br><span class="line">				+ address + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在主程序中：</span><br><span class="line">    Student student = new Student(20, &quot;hha&quot;, &quot;320&quot;);</span><br><span class="line">		String s = JSON.toJSONString(student);</span><br><span class="line">		edis.set(&quot;student&quot;, s);</span><br><span class="line"></span><br><span class="line">		String get = edis.get(&quot;student&quot;);</span><br><span class="line">		Object object = JSON.parseObject(get, Student.class);</span><br><span class="line">		System.out.println(&quot;ss=&quot; + object);</span><br><span class="line">		</span><br><span class="line">	得到的输出结果：</span><br><span class="line">		ss=Student [age=20, name=hha, address=320]</span><br></pre></td></tr></table></figure>
+<p><strong>注意，在POJO类中必须要有每个属性的set(),get()方法，这样才能将对象完整得转为字符串，不然会得到一个空的字符串！</strong><br>这样就完成了redis存储对象。我觉得这样也是一种不错的方法，而且也便于从redis中获取到对象字符串之后进行传输。比如在一些场景中，后端服务器得到对象之后要将数据传给前端的时候，就可以尝试用这种方法</p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/入门/" rel="tag">#入门</a>
+          
+            <a href="/tags/redis/" rel="tag">#redis</a>
+          
+            <a href="/tags/json/" rel="tag">#json</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/11/Maven下载-配置-创建项目/" rel="next" title="Maven下载,配置,创建项目">
+                <i class="fa fa-chevron-left"></i> Maven下载,配置,创建项目
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/21/单例模式5种实现方式/" rel="prev" title="单例模式5种实现方式">
+                单例模式5种实现方式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="mingfeng lu" />
+          <p class="site-author-name" itemprop="name">mingfeng lu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装配置"><span class="nav-number">1.</span> <span class="nav-text">安装配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eclipse中使用redis"><span class="nav-number">2.</span> <span class="nav-text">eclipse中使用redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis存储对象"><span class="nav-number">3.</span> <span class="nav-text">redis存储对象</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mingfeng lu</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

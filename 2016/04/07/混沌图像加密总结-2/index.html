@@ -1,0 +1,564 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,图像加密," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Boom" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;前面说到怎样区分不同类型的图片，参考了这篇博客 :表示不同文件类型的魔术数字&amp;#160; &amp;#160; &amp;#160; &amp;#160;这里所说的表示不同文件类型的魔术数字，指定是文件的最开头的几个用于唯一区别其它文件类型的字节，有了这些魔术数字，我们就可以很方便的区别不同的文件，这也使得编程变得更加容易&amp;#160; &amp;#160; &amp;#160; &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="混沌图像加密总结(2)">
+<meta property="og:url" content="http://FlashLightNing.github.io/2016/04/07/混沌图像加密总结-2/index.html">
+<meta property="og:site_name" content="Boom">
+<meta property="og:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;前面说到怎样区分不同类型的图片，参考了这篇博客 :表示不同文件类型的魔术数字&amp;#160; &amp;#160; &amp;#160; &amp;#160;这里所说的表示不同文件类型的魔术数字，指定是文件的最开头的几个用于唯一区别其它文件类型的字节，有了这些魔术数字，我们就可以很方便的区别不同的文件，这也使得编程变得更加容易&amp;#160; &amp;#160; &amp;#160; &amp;#">
+<meta property="og:updated_time" content="2016-04-07T16:12:54.664Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="混沌图像加密总结(2)">
+<meta name="twitter:description" content="&amp;#160; &amp;#160; &amp;#160; &amp;#160;前面说到怎样区分不同类型的图片，参考了这篇博客 :表示不同文件类型的魔术数字&amp;#160; &amp;#160; &amp;#160; &amp;#160;这里所说的表示不同文件类型的魔术数字，指定是文件的最开头的几个用于唯一区别其它文件类型的字节，有了这些魔术数字，我们就可以很方便的区别不同的文件，这也使得编程变得更加容易&amp;#160; &amp;#160; &amp;#160; &amp;#">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+  <title> 混沌图像加密总结(2) | Boom </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Boom</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">黎明就在眼前</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                混沌图像加密总结(2)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-04-07T23:32:43+08:00" content="2016-04-07">
+              2016-04-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#160; &#160; &#160; &#160;前面说到怎样区分不同类型的图片，参考了这篇博客 :<a href="http://blog.csdn.net/fenglibing/article/details/7733496" target="_blank" rel="external">表示不同文件类型的魔术数字</a><br>&#160; &#160; &#160; &#160;<strong>这里所说的表示不同文件类型的魔术数字，指定是文件的最开头的几个用于唯一区别其它文件类型的字节，有了这些魔术数字，我们就可以很方便的区别不同的文件，这也使得编程变得更加容易</strong><br>&#160; &#160; &#160; &#160;比如，一个JPEG文件，它开头的一些字节可能是类似这样的”ffd8 ffe0 0010 4a46 4946 0001 0101 0047 ……JFIF…..G“，这里”ffd8“就表示了这个文件是一个JPEG类型的文件，”ffe0“表示这是JFIF类型结构。<br>所以我们只需要判断图片开头的几个字节就可以得到它的类型，只要它的开头不等于ffd8，那么它就不是JPEG类型的图片<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public static boolean getImageType(String imgPath) throws IOException &#123;</span><br><span class="line">	File image = new File(imgPath);</span><br><span class="line">	InputStream is = new FileInputStream(image);</span><br><span class="line">	byte[] bt = new byte[2];</span><br><span class="line">	is.read(bt);</span><br><span class="line">	StringBuilder stringBuilder = new StringBuilder();</span><br><span class="line">	if (bt == null || bt.length &lt;= 0) &#123;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">	for (int i = 0; i &lt; bt.length; i++) &#123;</span><br><span class="line">		int v = bt[i] &amp; 0xFF;</span><br><span class="line">		String hv = Integer.toHexString(v);</span><br><span class="line">		if (hv.length() &lt; 2) &#123;</span><br><span class="line">			stringBuilder.append(0);</span><br><span class="line">		&#125;</span><br><span class="line">		stringBuilder.append(hv);</span><br><span class="line">	&#125;</span><br><span class="line">	String number = stringBuilder.toString();</span><br><span class="line">	System.out.println(number);</span><br><span class="line">	if (number.equals(&quot;ffd8&quot;)) &#123;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个方法只是用来判断是否为JPEG类型的图片，如果不是，就把它统一转为JPEG类型的图片：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 将任意类型的转为JPEG类型的图片</span><br><span class="line"> * 若已经为JPEG图片,则直接返回原地址;否则返回处理后的地址</span><br><span class="line"> * @param inputPath</span><br><span class="line"> * @param outputPath</span><br><span class="line"> * @param type</span><br><span class="line"> * @throws IOException</span><br><span class="line"> */</span><br><span class="line">public static String convertPicture(String inputPath, String outputPath,</span><br><span class="line">		String type) throws IOException &#123;</span><br><span class="line"></span><br><span class="line">	boolean is_Jpeg = getImageType(inputPath);</span><br><span class="line">	if (is_Jpeg) &#123;//若已经为JPEG图片,则不用处理,直接返回</span><br><span class="line">		return inputPath;</span><br><span class="line">	&#125;</span><br><span class="line">	RenderedOp src2 = JAI.create(&quot;fileload&quot;, inputPath);</span><br><span class="line">	OutputStream os2 = new FileOutputStream(outputPath);</span><br><span class="line">	JPEGEncodeParam param2 = new JPEGEncodeParam();</span><br><span class="line"></span><br><span class="line">	// 指定格式类型，jpg 属于 JPEG 类型</span><br><span class="line">	ImageEncoder enc2 = ImageCodec.createImageEncoder(&quot;JPEG&quot;, os2, param2);</span><br><span class="line"></span><br><span class="line">	try &#123;</span><br><span class="line">		enc2.encode(src2);</span><br><span class="line">		os2.close();</span><br><span class="line">	&#125; catch (IOException e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	System.out.println(&quot;转换成功&quot;);</span><br><span class="line">	return outputPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>&#160; &#160; &#160; &#160;这里需要用到几个jar包:<a href="http://download.csdn.net/detail/xiaozhao3972/2703360" target="_blank" rel="external">CSDN链接</a><br> 如果要将其变成其他类型的图片，如bmp,png，只要将</p>
+<pre><code>```
+ImageCodec.createImageEncoder(&quot;JPEG&quot;, os2, param2);
+```  
+</code></pre><p>&#160; &#160; &#160; &#160;其中的JPEG换成BMP/PNG即可。完成图像类别的转换之后，就可以开开心心进行传输了<del>，也不会报空指针错误了</del></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/图像加密/" rel="tag">#图像加密</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/07/混沌序列图像加密传输/" rel="next" title="混沌序列图像加密传输总结（1）">
+                <i class="fa fa-chevron-left"></i> 混沌序列图像加密传输总结（1）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/11/Maven下载-配置-创建项目/" rel="prev" title="Maven下载,配置,创建项目">
+                Maven下载,配置,创建项目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/default_avatar.jpg"
+               alt="mingfeng lu" />
+          <p class="site-author-name" itemprop="name">mingfeng lu</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">Dieser Artikel hat kein Inhaltsverzeichnis</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">mingfeng lu</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

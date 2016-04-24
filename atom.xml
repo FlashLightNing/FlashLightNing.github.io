@@ -81,11 +81,11 @@
     </summary>
     
     
+      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+    
       <category term="redis" scheme="http://FlashLightNing.github.io/tags/redis/"/>
     
       <category term="json" scheme="http://FlashLightNing.github.io/tags/json/"/>
-    
-      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
@@ -137,9 +137,9 @@
     </summary>
     
     
-      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
-    
       <category term="maven" scheme="http://FlashLightNing.github.io/tags/maven/"/>
+    
+      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
