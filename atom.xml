@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://FlashLightNing.github.io/"/>
-  <updated>2016-04-25T07:15:09.290Z</updated>
+  <updated>2016-04-25T07:31:20.238Z</updated>
   <id>http://FlashLightNing.github.io/</id>
   
   <author>
@@ -14,6 +14,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式:观察者模式(Observer)</title>
+    <link href="http://FlashLightNing.github.io/2016/04/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F-Observer/"/>
+    <id>http://FlashLightNing.github.io/2016/04/25/设计模式-观察者模式-Observer/</id>
+    <published>2016-04-25T07:26:41.000Z</published>
+    <updated>2016-04-25T07:31:20.238Z</updated>
+    
+    <content type="html">&lt;p&gt;一个软件系统里面包含了各种对象，就像一片欣欣向荣的森林充满了各种生物一样。在一片森林中，各种生物彼此依赖和约束，形成一个个生物链。一种生物的状态变化会造成其他一些生物的相应行动，每一个生物都处于别的生物的互动之中。&lt;br&gt;同样，一个软件系统常常要求在某一个对象的状态发生变化的时候，某些其他的对象做出相应的改变。做到这一点的设计方案有很多，但是为了使系统能够易于复用，应该选择低耦合度的设计方案。减少对象之间的耦合有利于系统的复用，但是同时设计师需要使这些低耦合度的对象之间能够维持行动的协调一致，保证高度的协作。观察者模式是满足这一要求的各种设计方案中最重要的一种。&lt;br&gt;&lt;strong&gt;观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使它们能够自动更新自己。&lt;/strong&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一个软件系统里面包含了各种对象，就像一片欣欣向荣的森林充满了各种生物一样。在一片森林中，各种生物彼此依赖和约束，形成一个个生物链。一种生物的状态变化会造成其他一些生物的相应行动，每一个生物都处于别的生物的互动之中。&lt;br&gt;同样，一个软件系统常常要求在某一个对象的状态发生变化
+    
+    </summary>
+    
+    
+      <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
+    
+  </entry>
   
   <entry>
     <title>单例模式5种实现方式</title>
