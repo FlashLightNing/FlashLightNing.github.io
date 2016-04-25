@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://FlashLightNing.github.io/2016/04/21/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F5%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</loc>
+    <lastmod>2016-04-25T12:57:09.047Z</lastmod>
+    <data>
+        <display>
+        <title>设计模式:单例模式5种实现方式</title>
+        <pubTime>2016-04-21T15:13:10.000Z</pubTime>
+        
+        <tag>design-patterns</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://FlashLightNing.github.io/2016/04/25/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F-Observer/</loc>
+    <lastmod>2016-04-25T10:33:23.528Z</lastmod>
+    <data>
+        <display>
+        <title>设计模式:观察者模式(Observer)</title>
+        <pubTime>2016-04-25T07:26:41.000Z</pubTime>
+        
+        <tag>design-patterns</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://FlashLightNing.github.io/2016/04/07/About-Blog/</loc>
+    <lastmod>2016-04-25T04:22:12.926Z</lastmod>
+    <data>
+        <display>
+        <title>About Blog</title>
+        <pubTime>2016-04-06T16:45:38.000Z</pubTime>
+        
+        <tag>生活</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://FlashLightNing.github.io/2016/04/11/Maven%E4%B8%8B%E8%BD%BD-%E9%85%8D%E7%BD%AE-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2016-04-25T04:22:02.352Z</lastmod>
+    <data>
+        <display>
+        <title>Maven下载,配置,创建项目</title>
+        <pubTime>2016-04-11T09:57:16.000Z</pubTime>
+        
+        <tag>maven</tag>
+         
+        <tag>入门</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://FlashLightNing.github.io/2016/04/12/redis%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E5%8F%8A%E7%94%A8JSON%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%96%B9%E5%BC%8F%E8%A7%A3%E5%86%B3%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2016-04-12T13:14:15.975Z</lastmod>
+    <data>
+        <display>
+        <title>redis简单使用及用JSON字符串的方式解决对象存储问题</title>
+        <pubTime>2016-04-12T09:39:31.000Z</pubTime>
+        
+        <tag>入门</tag>
+         
+        <tag>redis</tag>
+         
+        <tag>json</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://FlashLightNing.github.io/2016/04/07/%E6%B7%B7%E6%B2%8C%E5%9B%BE%E5%83%8F%E5%8A%A0%E5%AF%86%E6%80%BB%E7%BB%93-2/</loc>
+    <lastmod>2016-04-07T16:12:54.664Z</lastmod>
+    <data>
+        <display>
+        <title>混沌图像加密总结(2)</title>
+        <pubTime>2016-04-07T15:32:43.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>图像加密</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://FlashLightNing.github.io/2016/04/07/%E6%B7%B7%E6%B2%8C%E5%BA%8F%E5%88%97%E5%9B%BE%E5%83%8F%E5%8A%A0%E5%AF%86%E4%BC%A0%E8%BE%93/</loc>
+    <lastmod>2016-04-07T15:49:07.158Z</lastmod>
+    <data>
+        <display>
+        <title>混沌序列图像加密传输总结（1）</title>
+        <pubTime>2016-04-07T14:02:40.000Z</pubTime>
+        
+        <tag>java</tag>
+         
+        <tag>图像加密</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+</urlset>
