@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://FlashLightNing.github.io/"/>
-  <updated>2016-04-25T10:33:23.528Z</updated>
+  <updated>2016-04-26T15:49:33.482Z</updated>
   <id>http://FlashLightNing.github.io/</id>
   
   <author>
@@ -14,6 +14,188 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>细数JDK里的设计模式</title>
+    <link href="http://FlashLightNing.github.io/2016/04/26/%E7%BB%86%E6%95%B0JDK%E9%87%8C%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://FlashLightNing.github.io/2016/04/26/细数JDK里的设计模式/</id>
+    <published>2016-04-26T15:02:04.000Z</published>
+    <updated>2016-04-26T15:49:33.482Z</updated>
+    
+    <content type="html">&lt;p&gt;转自：&lt;a href=&quot;http://it.deepinmind.com/设计模式/2014/03/10/细数JDK里的设计模式.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;细数JDK里的设计模式&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;结构型模式：&quot;&gt;&lt;a href=&quot;#结构型模式：&quot; class=&quot;headerlink&quot; title=&quot;结构型模式：&quot;&gt;&lt;/a&gt;结构型模式：&lt;/h1&gt;&lt;h2 id=&quot;适配器模式：&quot;&gt;&lt;a href=&quot;#适配器模式：&quot; class=&quot;headerlink&quot; title=&quot;适配器模式：&quot;&gt;&lt;/a&gt;适配器模式：&lt;/h2&gt;&lt;p&gt;用来把一个接口转化成另一个接口.  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;java.util.Arrays#asList()&lt;/li&gt;
+&lt;li&gt;javax.swing.JTable(TableModel)&lt;/li&gt;
+&lt;li&gt;java.io.InputStreamReader(InputStream)&lt;/li&gt;
+&lt;li&gt;java.io.OutputStreamWriter(OutputStream)&lt;/li&gt;
+&lt;li&gt;javax.xml.bind.annotation.adapters.XmlAdapter#marshal()&lt;/li&gt;
+&lt;li&gt;javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal()&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;桥接模式：&quot;&gt;&lt;a href=&quot;#桥接模式：&quot; class=&quot;headerlink&quot; title=&quot;桥接模式：&quot;&gt;&lt;/a&gt;桥接模式：&lt;/h2&gt;&lt;p&gt;这个模式将抽象和抽象操作的实现进行了解耦，这样使得抽象和实现可以独立地变化。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AWT (It provides an abstraction layer which maps onto the native OS the windowing support.)&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;JDBC  &lt;/p&gt;
+&lt;h2 id=&quot;组合模式&quot;&gt;&lt;a href=&quot;#组合模式&quot; class=&quot;headerlink&quot; title=&quot;组合模式:&quot;&gt;&lt;/a&gt;组合模式:&lt;/h2&gt;&lt;p&gt;使得客户端看来单个对象和对象的组合是同等的。换句话说，某个类型的方法同时也接受自身类型作为参数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;javax.swing.JComponent#add(Component)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.awt.Container#add(Component)&lt;/li&gt;
+&lt;li&gt;java.util.Map#putAll(Map)&lt;/li&gt;
+&lt;li&gt;java.util.List#addAll(Collection)&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Set#addAll(Collection)&lt;/p&gt;
+&lt;h2 id=&quot;装饰者模式：&quot;&gt;&lt;a href=&quot;#装饰者模式：&quot; class=&quot;headerlink&quot; title=&quot;装饰者模式：&quot;&gt;&lt;/a&gt;装饰者模式：&lt;/h2&gt;&lt;p&gt;动态的给一个对象附加额外的功能，这也是子类的一种替代方式。可以看到，在创建一个类型的时候，同时也传入同一类型的对象。这在JDK里随处可见，你会发现它无处不在，所以下面这个列表只是一小部分。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.io.BufferedInputStream(InputStream)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.io.DataInputStream(InputStream)&lt;/li&gt;
+&lt;li&gt;java.io.BufferedOutputStream(OutputStream)&lt;/li&gt;
+&lt;li&gt;java.util.zip.ZipOutputStream(OutputStream)&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Collections#checkedList|Map|Set|SortedSet|SortedMap&lt;/p&gt;
+&lt;h2 id=&quot;门面模式：&quot;&gt;&lt;a href=&quot;#门面模式：&quot; class=&quot;headerlink&quot; title=&quot;门面模式：&quot;&gt;&lt;/a&gt;门面模式：&lt;/h2&gt;&lt;p&gt;给一组组件，接口，抽象，或者子系统提供一个简单的接口。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.Class&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;javax.faces.webapp.FacesServlet&lt;/p&gt;
+&lt;h2 id=&quot;享元模式&quot;&gt;&lt;a href=&quot;#享元模式&quot; class=&quot;headerlink&quot; title=&quot;享元模式&quot;&gt;&lt;/a&gt;享元模式&lt;/h2&gt;&lt;p&gt;使用缓存来加速大量小对象的访问时间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.Integer#valueOf(int)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.lang.Boolean#valueOf(boolean)&lt;/li&gt;
+&lt;li&gt;java.lang.Byte#valueOf(byte)&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.Character#valueOf(char)&lt;/p&gt;
+&lt;h2 id=&quot;代理模式&quot;&gt;&lt;a href=&quot;#代理模式&quot; class=&quot;headerlink&quot; title=&quot;代理模式&quot;&gt;&lt;/a&gt;代理模式&lt;/h2&gt;&lt;p&gt;代理模式是用一个简单的对象来代替一个复杂的或者创建耗时的对象。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.reflect.Proxy&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;RMI&lt;/p&gt;
+&lt;h1 id=&quot;创建模式&quot;&gt;&lt;a href=&quot;#创建模式&quot; class=&quot;headerlink&quot; title=&quot;创建模式&quot;&gt;&lt;/a&gt;创建模式&lt;/h1&gt;&lt;h2 id=&quot;抽象工厂模式&quot;&gt;&lt;a href=&quot;#抽象工厂模式&quot; class=&quot;headerlink&quot; title=&quot;抽象工厂模式&quot;&gt;&lt;/a&gt;抽象工厂模式&lt;/h2&gt;&lt;p&gt;抽象工厂模式提供了一个协议来生成一系列的相关或者独立的对象，而不用指定具体对象的类型。它使得应用程序能够和使用的框架的具体实现进行解耦。这在JDK或者许多框架比如Spring中都随处可见。它们也很容易识别，一个创建新对象的方法，返回的却是接口或者抽象类的，就是抽象工厂模式了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Calendar#getInstance()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.util.Arrays#asList()&lt;/li&gt;
+&lt;li&gt;java.util.ResourceBundle#getBundle()&lt;/li&gt;
+&lt;li&gt;java.sql.DriverManager#getConnection()&lt;/li&gt;
+&lt;li&gt;java.sql.Connection#createStatement()&lt;/li&gt;
+&lt;li&gt;java.sql.Statement#executeQuery()&lt;/li&gt;
+&lt;li&gt;java.text.NumberFormat#getInstance()&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;javax.xml.transform.TransformerFactory#newInstance()&lt;/p&gt;
+&lt;h2 id=&quot;建造模式-Builder&quot;&gt;&lt;a href=&quot;#建造模式-Builder&quot; class=&quot;headerlink&quot; title=&quot;建造模式(Builder)&quot;&gt;&lt;/a&gt;建造模式(Builder)&lt;/h2&gt;&lt;p&gt;定义了一个新的类来构建另一个类的实例，以简化复杂对象的创建。建造模式通常也使用方法链接来实现。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.StringBuilder#append()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.lang.StringBuffer#append()&lt;/li&gt;
+&lt;li&gt;java.sql.PreparedStatement&lt;/li&gt;
+&lt;li&gt;javax.swing.GroupLayout.Group#addComponent() &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;工厂方法&lt;br&gt;就是一个返回具体对象的方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;java.lang.Proxy#newProxyInstance()&lt;/li&gt;
+&lt;li&gt;java.lang.Object#toString()&lt;/li&gt;
+&lt;li&gt;java.lang.Class#newInstance()&lt;/li&gt;
+&lt;li&gt;java.lang.reflect.Array#newInstance()&lt;/li&gt;
+&lt;li&gt;java.lang.reflect.Constructor#newInstance()&lt;/li&gt;
+&lt;li&gt;java.lang.Boolean#valueOf(String)&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.Class#forName()&lt;/p&gt;
+&lt;h2 id=&quot;原型模式&quot;&gt;&lt;a href=&quot;#原型模式&quot; class=&quot;headerlink&quot; title=&quot;原型模式&quot;&gt;&lt;/a&gt;原型模式&lt;/h2&gt;&lt;p&gt;使得类的实例能够生成自身的拷贝。如果创建一个对象的实例非常复杂且耗时时，就可以使用这种模式，而不重新创建一个新的实例，你可以拷贝一个对象并直接修改它。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.Object#clone()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.Cloneable&lt;/p&gt;
+&lt;h2 id=&quot;单例模式&quot;&gt;&lt;a href=&quot;#单例模式&quot; class=&quot;headerlink&quot; title=&quot;单例模式&quot;&gt;&lt;/a&gt;单例模式&lt;/h2&gt;&lt;p&gt;用来确保类只有一个实例。Joshua Bloch在Effetive Java中建议到，还有一种方法就是使用枚举。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.Runtime#getRuntime()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.awt.Toolkit#getDefaultToolkit()&lt;/li&gt;
+&lt;li&gt;java.awt.GraphicsEnvironment#getLocalGraphicsEnvironment()&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.awt.Desktop#getDesktop()&lt;/p&gt;
+&lt;h1 id=&quot;行为模式&quot;&gt;&lt;a href=&quot;#行为模式&quot; class=&quot;headerlink&quot; title=&quot;行为模式&quot;&gt;&lt;/a&gt;行为模式&lt;/h1&gt;&lt;h2 id=&quot;责任链模式&quot;&gt;&lt;a href=&quot;#责任链模式&quot; class=&quot;headerlink&quot; title=&quot;责任链模式&quot;&gt;&lt;/a&gt;责任链模式&lt;/h2&gt;&lt;p&gt;通过把请求从一个对象传递到链条中下一个对象的方式，直到请求被处理完毕，以实现对象间的解耦。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.logging.Logger#log()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;javax.servlet.Filter#doFilter()&lt;/p&gt;
+&lt;h2 id=&quot;命令模式&quot;&gt;&lt;a href=&quot;#命令模式&quot; class=&quot;headerlink&quot; title=&quot;命令模式&quot;&gt;&lt;/a&gt;命令模式&lt;/h2&gt;&lt;p&gt;将操作封装到对象内，以便存储，传递和返回。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.Runnable&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;javax.swing.Action&lt;/p&gt;
+&lt;h2 id=&quot;解释器模式&quot;&gt;&lt;a href=&quot;#解释器模式&quot; class=&quot;headerlink&quot; title=&quot;解释器模式&quot;&gt;&lt;/a&gt;解释器模式&lt;/h2&gt;&lt;p&gt;这个模式通常定义了一个语言的语法，然后解析相应语法的语句。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Pattern&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.text.Normalizer&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.text.Format&lt;/p&gt;
+&lt;h2 id=&quot;迭代器模式&quot;&gt;&lt;a href=&quot;#迭代器模式&quot; class=&quot;headerlink&quot; title=&quot;迭代器模式&quot;&gt;&lt;/a&gt;迭代器模式&lt;/h2&gt;&lt;p&gt;提供一个一致的方法来顺序访问集合中的对象，这个方法与底层的集合的具体实现无关。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Iterator&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Enumeration&lt;/p&gt;
+&lt;h2 id=&quot;中介者模式&quot;&gt;&lt;a href=&quot;#中介者模式&quot; class=&quot;headerlink&quot; title=&quot;中介者模式&quot;&gt;&lt;/a&gt;中介者模式&lt;/h2&gt;&lt;p&gt;通过使用一个中间对象来进行消息分发以及减少类之间的直接依赖。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Timer&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.util.concurrent.Executor#execute()&lt;/li&gt;
+&lt;li&gt;java.util.concurrent.ExecutorService#submit()&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.lang.reflect.Method#invoke()&lt;/p&gt;
+&lt;h2 id=&quot;备忘录模式&quot;&gt;&lt;a href=&quot;#备忘录模式&quot; class=&quot;headerlink&quot; title=&quot;备忘录模式&quot;&gt;&lt;/a&gt;备忘录模式&lt;/h2&gt;&lt;p&gt;生成对象状态的一个快照，以便对象可以恢复原始状态而不用暴露自身的内容。Date对象通过自身内部的一个long值来实现备忘录模式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Date&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.io.Serializable&lt;/p&gt;
+&lt;h2 id=&quot;空对象模式&quot;&gt;&lt;a href=&quot;#空对象模式&quot; class=&quot;headerlink&quot; title=&quot;空对象模式&quot;&gt;&lt;/a&gt;空对象模式&lt;/h2&gt;&lt;p&gt;这个模式通过一个无意义的对象来代替没有对象这个状态。它使得你不用额外对空对象进行处理。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Collections#emptyList()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.util.Collections#emptyMap()&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Collections#emptySet()&lt;/p&gt;
+&lt;h2 id=&quot;观察者模式&quot;&gt;&lt;a href=&quot;#观察者模式&quot; class=&quot;headerlink&quot; title=&quot;观察者模式&quot;&gt;&lt;/a&gt;观察者模式&lt;/h2&gt;&lt;p&gt;它使得一个对象可以灵活的将消息发送给感兴趣的对象。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.EventListener&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;javax.servlet.http.HttpSessionBindingListener&lt;/li&gt;
+&lt;li&gt;javax.servlet.http.HttpSessionAttributeListener&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;javax.faces.event.PhaseListener&lt;/p&gt;
+&lt;h2 id=&quot;状态模式&quot;&gt;&lt;a href=&quot;#状态模式&quot; class=&quot;headerlink&quot; title=&quot;状态模式&quot;&gt;&lt;/a&gt;状态模式&lt;/h2&gt;&lt;p&gt;通过改变对象内部的状态，使得你可以在运行时动态改变一个对象的行为。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Iterator&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;javax.faces.lifecycle.LifeCycle#execute()&lt;/p&gt;
+&lt;h2 id=&quot;策略模式&quot;&gt;&lt;a href=&quot;#策略模式&quot; class=&quot;headerlink&quot; title=&quot;策略模式&quot;&gt;&lt;/a&gt;策略模式&lt;/h2&gt;&lt;p&gt;使用这个模式来将一组算法封装成一系列对象。通过传递这些对象可以灵活的改变程序的功能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Comparator#compare()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;javax.servlet.http.HttpServlet&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;javax.servlet.Filter#doFilter()&lt;/p&gt;
+&lt;h2 id=&quot;模板方法模式&quot;&gt;&lt;a href=&quot;#模板方法模式&quot; class=&quot;headerlink&quot; title=&quot;模板方法模式&quot;&gt;&lt;/a&gt;模板方法模式&lt;/h2&gt;&lt;p&gt;让子类可以重写方法的一部分，而不是整个重写，你可以控制子类需要重写那些操作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.Collections#sort()&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;java.io.InputStream#skip()&lt;/li&gt;
+&lt;li&gt;java.io.InputStream#read()&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;java.util.AbstractList#indexOf()&lt;/p&gt;
+&lt;h2 id=&quot;访问者模式&quot;&gt;&lt;a href=&quot;#访问者模式&quot; class=&quot;headerlink&quot; title=&quot;访问者模式&quot;&gt;&lt;/a&gt;访问者模式&lt;/h2&gt;&lt;p&gt;提供一个方便的可维护的方式来操作一组对象。它使得你在不改变操作的对象前提下，可以修改或者扩展对象的行为。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;javax.lang.model.element.Element &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;javax.lang.model.element.ElementVisitor&lt;/li&gt;
+&lt;li&gt;javax.lang.model.type.TypeMirror &lt;/li&gt;
+&lt;li&gt;javax.lang.model.type.TypeVisitor&lt;br&gt;译者注：很多地方可能会存在争议，是否是某种模式其实并不是特别重要，重要的是它们的设计能为改善我们的代码提供一些经验。&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;转自：&lt;a href=&quot;http://it.deepinmind.com/设计模式/2014/03/10/细数JDK里的设计模式.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;细数JDK里的设计模式&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;结构型模式：&quot;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://FlashLightNing.github.io/tags/java/"/>
+    
+      <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
+    
+  </entry>
   
   <entry>
     <title>设计模式:观察者模式(Observer)</title>
