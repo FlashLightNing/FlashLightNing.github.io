@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://FlashLightNing.github.io/"/>
-  <updated>2016-04-26T15:51:20.562Z</updated>
+  <updated>2016-04-26T15:52:08.900Z</updated>
   <id>http://FlashLightNing.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://FlashLightNing.github.io/2016/04/26/%E7%BB%86%E6%95%B0JDK%E9%87%8C%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     <id>http://FlashLightNing.github.io/2016/04/26/细数JDK里的设计模式/</id>
     <published>2016-04-26T15:02:04.000Z</published>
-    <updated>2016-04-26T15:51:20.562Z</updated>
+    <updated>2016-04-26T15:52:08.900Z</updated>
     
     <content type="html">&lt;p&gt;转自：&lt;a href=&quot;http://it.deepinmind.com/设计模式/2014/03/10/细数JDK里的设计模式.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;细数JDK里的设计模式&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&quot;结构型模式：&quot;&gt;&lt;a href=&quot;#结构型模式：&quot; class=&quot;headerlink&quot; title=&quot;结构型模式：&quot;&gt;&lt;/a&gt;结构型模式：&lt;/h1&gt;&lt;h2 id=&quot;适配器模式：&quot;&gt;&lt;a href=&quot;#适配器模式：&quot; class=&quot;headerlink&quot; title=&quot;适配器模式：&quot;&gt;&lt;/a&gt;适配器模式：&lt;/h2&gt;&lt;p&gt;用来把一个接口转化成另一个接口.  &lt;/p&gt;
@@ -30,12 +30,12 @@
 &lt;li&gt;java.io.InputStreamReader(InputStream)&lt;/li&gt;
 &lt;li&gt;java.io.OutputStreamWriter(OutputStream)&lt;/li&gt;
 &lt;li&gt;javax.xml.bind.annotation.adapters.XmlAdapter#marshal()&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal()&lt;/p&gt;
+&lt;li&gt;javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal()&lt;/li&gt;
+&lt;/ul&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;桥接模式：&quot;&gt;&lt;a href=&quot;#桥接模式：&quot; class=&quot;headerlink&quot; title=&quot;桥接模式：&quot;&gt;&lt;/a&gt;桥接模式：&lt;/h2&gt;&lt;p&gt;这个模式将抽象和抽象操作的实现进行了解耦，这样使得抽象和实现可以独立地变化。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;AWT (It provides an abstraction layer which maps onto the native OS the windowing support.)&lt;/p&gt;
-&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;AWT (It provides an abstraction layer which maps onto the native OS the windowing support.)&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;JDBC  &lt;/p&gt;
 &lt;h2 id=&quot;组合模式&quot;&gt;&lt;a href=&quot;#组合模式&quot; class=&quot;headerlink&quot; title=&quot;组合模式:&quot;&gt;&lt;/a&gt;组合模式:&lt;/h2&gt;&lt;p&gt;使得客户端看来单个对象和对象的组合是同等的。换句话说，某个类型的方法同时也接受自身类型作为参数。&lt;/p&gt;
 &lt;/li&gt;
@@ -194,14 +194,15 @@
 &lt;li&gt;java.io.InputStreamReader(InputStream)&lt;/li&gt;
 &lt;li&gt;java.io.OutputStreamWriter(OutputStream)&lt;/li&gt;
 &lt;li&gt;javax.xml.bind.annotation.adapters.XmlAdapter#marshal()&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal()&lt;/p&gt;
+&lt;li&gt;javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal()&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
     
-      <category term="java" scheme="http://FlashLightNing.github.io/tags/java/"/>
-    
       <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
+    
+      <category term="java" scheme="http://FlashLightNing.github.io/tags/java/"/>
     
   </entry>
   
@@ -309,11 +310,11 @@
     </summary>
     
     
-      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
-    
       <category term="redis" scheme="http://FlashLightNing.github.io/tags/redis/"/>
     
       <category term="json" scheme="http://FlashLightNing.github.io/tags/json/"/>
+    
+      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
@@ -365,9 +366,9 @@
     </summary>
     
     
-      <category term="maven" scheme="http://FlashLightNing.github.io/tags/maven/"/>
-    
       <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="maven" scheme="http://FlashLightNing.github.io/tags/maven/"/>
     
   </entry>
   
