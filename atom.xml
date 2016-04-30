@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://FlashLightNing.github.io/"/>
-  <updated>2016-04-28T18:12:04.653Z</updated>
+  <updated>2016-04-30T08:32:37.587Z</updated>
   <id>http://FlashLightNing.github.io/</id>
   
   <author>
@@ -14,6 +14,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2016-4-30 阅读计划</title>
+    <link href="http://FlashLightNing.github.io/2016/04/30/2016-4-30-%E9%98%85%E8%AF%BB%E8%AE%A1%E5%88%92/"/>
+    <id>http://FlashLightNing.github.io/2016/04/30/2016-4-30-阅读计划/</id>
+    <published>2016-04-30T08:28:39.000Z</published>
+    <updated>2016-04-30T08:32:37.587Z</updated>
+    
+    <content type="html">&lt;p&gt;《Spring 技术内幕》&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《Spring 技术内幕》&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="reading" scheme="http://FlashLightNing.github.io/categories/reading/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>细数JDK里的设计模式</title>
@@ -202,9 +224,9 @@
       <category term="设计模式" scheme="http://FlashLightNing.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
-    
       <category term="java" scheme="http://FlashLightNing.github.io/tags/java/"/>
+    
+      <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
     
   </entry>
   
