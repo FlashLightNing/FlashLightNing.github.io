@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://FlashLightNing.github.io/2016/04/07/About-Blog/</loc>
+    
+    <lastmod>2016-04-30T08:14:44.020Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://FlashLightNing.github.io/reading/index.html</loc>
     
-    <lastmod>2016-04-30T08:09:09.413Z</lastmod>
+    <lastmod>2016-04-30T08:09:55.441Z</lastmod>
     
   </url>
   
@@ -40,13 +47,6 @@
     <loc>http://FlashLightNing.github.io/tags/index.html</loc>
     
     <lastmod>2016-04-25T04:26:14.508Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://FlashLightNing.github.io/2016/04/07/About-Blog/</loc>
-    
-    <lastmod>2016-04-25T04:22:12.926Z</lastmod>
     
   </url>
   
