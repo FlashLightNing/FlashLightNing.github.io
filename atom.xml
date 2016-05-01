@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://FlashLightNing.github.io/"/>
-  <updated>2016-05-01T06:44:26.729Z</updated>
+  <updated>2016-05-01T06:46:14.113Z</updated>
   <id>http://FlashLightNing.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://FlashLightNing.github.io/2016/05/01/%E8%AF%BB%E3%80%8ASpring-%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95%E3%80%8B-%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9AIoC%E5%AE%B9%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0-1/"/>
     <id>http://FlashLightNing.github.io/2016/05/01/读《Spring-技术内幕》-第二章：IoC容器的实现-1/</id>
     <published>2016-04-30T17:35:58.000Z</published>
-    <updated>2016-05-01T06:44:26.729Z</updated>
+    <updated>2016-05-01T06:46:14.113Z</updated>
     
-    <content type="html">&lt;h1 id=&quot;第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）&quot;&gt;&lt;a href=&quot;#第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）&quot; class=&quot;headerlink&quot; title=&quot;第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）&quot;&gt;&lt;/a&gt;第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）&lt;/h1&gt;&lt;h2 id=&quot;博客概要&quot;&gt;&lt;a href=&quot;#博客概要&quot; class=&quot;headerlink&quot; title=&quot;博客概要&quot;&gt;&lt;/a&gt;博客概要&lt;/h2&gt;&lt;p&gt;博客首先介绍了什么是IOC容器？IOC容器可以替我们做什么？为什么需要IOC容器？它又有什么优点？然后总结了Spring是如何设计和实现IOC容器的：Spring设计了一张&lt;strong&gt;广泛的的接口关系图&lt;/strong&gt;，在保证了IOC容器最基本功能规范的前提下，还提供了一系列的接口，这些接口可能在不同的环境下会被用到（比如读取不同配置信息，从不同的I/O读取配置信息，从类路径读取，从文件系统中读取等等），那么在用到的时候，只需要继承这些接口并实现，就可以实现IOC容器功能的扩展。Spring主要提供了2个主要的容器系列：BeanFactory和ApplicationContext，前者提供了IOC容器的基本规范的接口，比如有getBean()等方法，后者是高级实现。同时简要地分析了IOC容器的接口关系图&lt;/p&gt;
+    <content type="html">&lt;h1 id=&quot;第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）&quot;&gt;&lt;a href=&quot;#第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）&quot; class=&quot;headerlink&quot; title=&quot;第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）&quot;&gt;&lt;/a&gt;第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）&lt;/h1&gt;&lt;h2 id=&quot;博客概要&quot;&gt;&lt;a href=&quot;#博客概要&quot; class=&quot;headerlink&quot; title=&quot;博客概要&quot;&gt;&lt;/a&gt;博客概要&lt;/h2&gt;&lt;p&gt;博客首先介绍了什么是IOC容器？IOC容器可以替我们做什么？为什么需要IOC容器？它又有什么优点？然后总结了Spring是如何设计和实现IOC容器的：Spring设计了一张&lt;strong&gt;广泛的的接口关系图&lt;/strong&gt;，在保证了IOC容器最基本功能规范的前提下，还提供了一系列的接口，这些接口可能在不同的环境下会被用到（比如读取不同配置信息，从不同的I/O读取配置信息，从类路径读取，从文件系统中读取等等），那么在用到的时候，只需要继承这些接口并实现，就可以实现IOC容器功能的扩展。Spring主要提供了2个主要的容器系列：BeanFactory和ApplicationContext，前者提供了IOC容器的基本规范的接口，比如有getBean()等方法，后者是高级实现。同时简要地分析了IOC容器的接口关系图&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;Spring-IoC容器概述（介绍）&quot;&gt;&lt;a href=&quot;#Spring-IoC容器概述（介绍）&quot; class=&quot;headerlink&quot; title=&quot;Spring IoC容器概述（介绍）:&quot;&gt;&lt;/a&gt;Spring IoC容器概述（介绍）:&lt;/h2&gt;&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;IoC（Inversion of Control),翻译过来就是&lt;strong&gt;控制反转&lt;/strong&gt;。我们都知道，在采用面向对象方法设计的软件系统中，它的底层实现都是由N个对象组成的，所有的对象通过彼此的合作，最终实现系统的业务逻辑。如果采用普通的方法，即在每个对象中需要的时候，通过new实例化一个需要的对象，然后调用这个对象的某个方法，这样会使得我们的整个系统的这些对象之间高度耦合。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;现在，伴随着工业级应用的规模越来越庞大，对象之间的依赖关系也越来越复杂，经常会出现对象之间的多重依赖性关系，因此，架构师和设计师对于系统的分析和设计，将面临更大的挑战。对象之间耦合度过高的系统，必然会出现牵一发而动全身的情形。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;http://7xsmif.com2.z0.glb.clouddn.com/ioc1.png&quot;&gt;&lt;br&gt;如图：对象之间复杂的依赖关系&lt;/p&gt;
 &lt;h3 id=&quot;那么什么是IoC容器呢？它又可以替我们做什么？&quot;&gt;&lt;a href=&quot;#那么什么是IoC容器呢？它又可以替我们做什么？&quot; class=&quot;headerlink&quot; title=&quot;那么什么是IoC容器呢？它又可以替我们做什么？&quot;&gt;&lt;/a&gt;那么什么是IoC容器呢？它又可以替我们做什么？&lt;/h3&gt;&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;&lt;strong&gt;那么什么是IoC容器呢？它又可以替我们做什么？&lt;/strong&gt;我的理解是可以把它比喻成一个第三方平台，里面存放着各种各样的实例化的对象，当我们需要的时候，直接从这个平台上拿这个对象到我们用到的地方，而不用自己去创建这个对象，给对象赋值等等一系列操作。我们只需要负责用，而不用去管这个对象是如何创建出来的。而且这样可以使得散落在系统中的各种实例化对象的操作统一集中到这个平台上，更加符合面向对象的特性。我们管这个平台叫IoC容器。为什么是容器呢？因为它里面存放着许许多多的实例化对象，就和一个杯子装了许多水一样，这个杯子就是容器，水就是对象。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;其中，最常见的方式叫做&lt;strong&gt;依赖注入&lt;/strong&gt; ：通过控制反转，对象在被创建的时候，由一个调控系统内所有对象的外界实体，将其所依赖的对象的引用传递给它。也可以说，依赖被注入到对象中。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;在Spring中，Spring IoC提供了一个基本的JavaBean容器，通过IoC模式管理依赖关系，并且通过依赖注入和AOP切面增强了为JavaBean这样的POJO对象赋予事务管理，生命周期管理等基本功能。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;在应用开发中，往往需要引用和调用其他组件的服务，这种依赖关系如果固化在组件设计中，就会造成依赖关系的僵化和维护难度的增加。如果使用IoC容器，将资源获取的方向反转，让IoC容器主动管理这些依赖关系，且将这些依赖关系注入到组件中，那么这样会使得这些依赖关系的适配和管理更加的灵活。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;具体说到Spring IoC容器的时候，Spring IoC通过对Spring设计的IoC容器系列的实现来为多种多样的场景进行适配。换句话说，&lt;strong&gt;Spring设计了丰富的，各种各样的接口关系（如下图2-2）&lt;/strong&gt; ，并且每个接口都可以有它被用到的地方，比如读取不同配置信息，从不同的I/O读取配置信息，从类路径读取，从文件系统中读取等等，然后在各式各样的场景下，对这些接口进行了实现。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;&lt;strong&gt;我认为，这种设计思想也是一种很不错的设计模式，在保证了最基本功能的基础上，通过设计各种各样的接口，来完成各式各样的扩展功能。而且如果需要新添加一个扩展功能，只需要再设计一个接口，然后让系统继承该接口，并实现这个接口里面的方法，就可以在不改动原先的代码就完成功能的扩展。很方便很灵活！&lt;/strong&gt;&lt;/p&gt;
@@ -49,7 +49,7 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）&quot;&gt;&lt;a href=&quot;#第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）&quot; class=&quot;headerlink&quot; title=&quot;第二章： Sprin
+      &lt;h1 id=&quot;第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）&quot;&gt;&lt;a href=&quot;#第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）&quot; class=&quot;headerlink&quot; title=&quot;第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）&quot;&gt;&lt;/a&gt;第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）&lt;/h1&gt;&lt;h2 id=&quot;博客概要&quot;&gt;&lt;a href=&quot;#博客概要&quot; class=&quot;headerlink&quot; title=&quot;博客概要&quot;&gt;&lt;/a&gt;博客概要&lt;/h2&gt;&lt;p&gt;博客首先介绍了什么是IOC容器？IOC容器可以替我们做什么？为什么需要IOC容器？它又有什么优点？然后总结了Spring是如何设计和实现IOC容器的：Spring设计了一张&lt;strong&gt;广泛的的接口关系图&lt;/strong&gt;，在保证了IOC容器最基本功能规范的前提下，还提供了一系列的接口，这些接口可能在不同的环境下会被用到（比如读取不同配置信息，从不同的I/O读取配置信息，从类路径读取，从文件系统中读取等等），那么在用到的时候，只需要继承这些接口并实现，就可以实现IOC容器功能的扩展。Spring主要提供了2个主要的容器系列：BeanFactory和ApplicationContext，前者提供了IOC容器的基本规范的接口，比如有getBean()等方法，后者是高级实现。同时简要地分析了IOC容器的接口关系图&lt;br&gt;
     
     </summary>
     
