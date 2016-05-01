@@ -319,7 +319,7 @@
 
       
         
-          <h1 id="第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）"><a href="#第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）" class="headerlink" title="第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）"></a>第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）</h1><h2 id="博客概要"><a href="#博客概要" class="headerlink" title="博客概要"></a>博客概要</h2><p>博客首先介绍了什么是IOC容器？IOC容器可以替我们做什么？为什么需要IOC容器？它又有什么优点？然后总结了Spring是如何设计和实现IOC容器的：Spring设计了一张<strong>广泛的的接口关系图</strong>，在保证了IOC容器最基本功能规范的前提下，还提供了一系列的接口，这些接口可能在不同的环境下会被用到（比如读取不同配置信息，从不同的I/O读取配置信息，从类路径读取，从文件系统中读取等等），那么在用到的时候，只需要继承这些接口并实现，就可以实现IOC容器功能的扩展。Spring主要提供了2个主要的容器系列：BeanFactory和ApplicationContext，前者提供了IOC容器的基本规范的接口，比如有getBean()等方法，后者是高级实现。同时简要地分析了IOC容器的接口关系图<br>
+          <h1 id="第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）"><a href="#第二章：-Spring-Framework的核心：-IoC容器的实现（第一篇总结）" class="headerlink" title="第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）"></a>第二章： Spring Framework的核心： IoC容器的实现（第一篇总结）</h1><h2 id="博客概要"><a href="#博客概要" class="headerlink" title="博客概要"></a>博客概要</h2><p>&#160; &#160; &#160; &#160;博客总共总结了2个方面：1是介绍了IoC的概念，2是根据Spring的IoC接口关系图，通过2条设计主线来分析Spring是如何设计和实现IoC容器的？同时也简要的分析了这张IoC接口关系图（详见图2-2）<br>&#160; &#160; &#160; &#160;博客首先介绍了什么是IOC容器？IOC容器可以替我们做什么？为什么需要IOC容器？它又有什么优点？然后总结了Spring是如何设计和实现IOC容器的：Spring设计了一张<strong>广泛的的接口关系图</strong>，在保证了IOC容器最基本功能规范的前提下，还提供了一系列的接口，这些接口可能在不同的环境下会被用到（比如读取不同配置信息，从不同的I/O读取配置信息，从类路径读取，从文件系统中读取等等），那么在用到的时候，只需要继承这些接口并实现，就可以实现IOC容器功能的扩展。Spring主要提供了2个主要的容器系列：<strong>BeanFactory</strong> 和 <strong>ApplicationContext</strong>，前者提供了IOC容器的基本规范的接口，比如有getBean()等方法，后者是高级实现，有着更丰富的功能。同时简要地分析了IOC容器的接口关系图以及它的设计思路<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/05/01/读《Spring-技术内幕》-第二章：IoC容器的实现-1/#more" rel="contents">
               阅读全文 &raquo;
@@ -1387,7 +1387,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7xsmif.com2.z0.glb.clouddn.com/read.jpg" rel="gallery_cino7rqeh0003mwlz1r13up7a"
+                 href="http://7xsmif.com2.z0.glb.clouddn.com/read.jpg" rel="gallery_cino9dcs10005lwlzuh3zyf3w"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://7xsmif.com2.z0.glb.clouddn.com/read.jpg" itemprop="contentUrl"/>
               </a>
