@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://FlashLightNing.github.io/"/>
-  <updated>2016-05-02T17:24:02.203Z</updated>
+  <updated>2016-05-04T15:38:34.668Z</updated>
   <id>http://FlashLightNing.github.io/</id>
   
   <author>
@@ -16,17 +16,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>鸟枪换炮</title>
+    <link href="http://FlashLightNing.github.io/2016/05/04/%E9%B8%9F%E6%9E%AA%E6%8D%A2%E7%82%AE/"/>
+    <id>http://FlashLightNing.github.io/2016/05/04/鸟枪换炮/</id>
+    <published>2016-05-04T15:19:44.000Z</published>
+    <updated>2016-05-04T15:38:34.668Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;昨天买的SSD今天一大早到了~迫不及待换到笔记本光驱上。由于软件太多，就不打算重装系统了，当个存储盘用用，等过段时间换电脑了再换到新电脑上去。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;然后赶紧把eclipse放进去，真是受够了之前开个软件要半天的感觉，换了之后感觉快多了&lt;del&gt;。然后是其他常用软件，chroome浏览器等等。不过放到ssd上之后确实开起来快多了&lt;/del&gt;&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;鸟枪换炮，终于不是小霸王了。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;昨天买的SSD今天一大早到了~迫不及待换到笔记本光驱上。由于软件太多，就不打算重装系统了，当个存储盘用用，等过段时间换电脑了再换到新电脑上去。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;然后赶紧把ecl
+    
+    </summary>
+    
+      <category term="生活" scheme="http://FlashLightNing.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="生活" scheme="http://FlashLightNing.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
+  
+  <entry>
     <title>读《Spring-技术内幕》 第二章：IoC容器的实现-2</title>
     <link href="http://FlashLightNing.github.io/2016/05/03/%E8%AF%BB%E3%80%8ASpring-%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95%E3%80%8B-%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9AIoC%E5%AE%B9%E5%99%A8%E7%9A%84%E5%AE%9E%E7%8E%B0-2/"/>
     <id>http://FlashLightNing.github.io/2016/05/03/读《Spring-技术内幕》-第二章：IoC容器的实现-2/</id>
     <published>2016-05-02T16:39:50.000Z</published>
-    <updated>2016-05-02T17:24:02.203Z</updated>
+    <updated>2016-05-03T05:02:18.502Z</updated>
     
     <content type="html">&lt;h1 id=&quot;IoC容器系列的设计与实现&quot;&gt;&lt;a href=&quot;#IoC容器系列的设计与实现&quot; class=&quot;headerlink&quot; title=&quot;IoC容器系列的设计与实现&quot;&gt;&lt;/a&gt;IoC容器系列的设计与实现&lt;/h1&gt;&lt;h2 id=&quot;概要&quot;&gt;&lt;a href=&quot;#概要&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h2&gt;&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;博客介绍了BeanFactory这个容器的基本接口，如getBean(String name)，containsBean(String name)等等，但是这些接口并没有具体的实现，因此给出了XmlBeanFactory容器的实现过程,还用编程的方式使用了DefaultListableBeanFactory这个容器,成功得获得了在BeanDefinition中定义的一个Bean.通过编程式的使用，让我们明白IoC容器中的关键的类之间的相互依赖关系，如Resource,BeanDefinitionReader等。&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//Spring中BeanDefinition都要封装成Resource的格式才能进行处理，因为beans.xml在类路径下，所以用ClassPathResource&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;ClassPathResource res =&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; ClassPathResource(&lt;span class=&quot;string&quot;&gt;&quot;beans.xml&quot;&lt;/span&gt;)；&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;DefalutListableBeanFactory factory =&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; DefaultListableBeanFactory();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//对XML文件的处理其实是通过XmlBeanDefinitionReader来处理的(详见BeanFactory容器的设计原理)，然后可以理解需要将得到的Bean定义信息传入factory工厂中，让它生成对象，所以需要传入一个factory对象。&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;XmlBeanDefinitionReader reader = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; XmlBeanDefinitionReader(factory)；&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//让res进行载入&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;read.loadBeanDefinitions(res);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//其实这样就完成了容器初始化的过程，后面就可以通过getBean(String name )得到相应的Bean了。大家可以试试~~&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h2 id=&quot;BeanFactory的应用场景&quot;&gt;&lt;a href=&quot;#BeanFactory的应用场景&quot; class=&quot;headerlink&quot; title=&quot;BeanFactory的应用场景&quot;&gt;&lt;/a&gt;BeanFactory的应用场景&lt;/h2&gt;&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;正如上一篇所提到的，BeanFactory提供的是最基本的IoC容器的功能。BeanFactory接口定义了IoC容器最基本的形式。很显然，Spring并没有给出容器的具体实现。下面来看看Spring是怎样定义IoC容器的基本接口的。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;首先最基本的是设计了getBean方法，这个方法是使用IoC容器API的主要方法。通过这个方法，可以取得这个容器管理的Bean(通过指定名字来索引)，取得了Bean之后，就可以应用在程序之中。&lt;br&gt;BeanFactory接口：&lt;br&gt;&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;BeanFactory&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;String FACTORY_BEAN_PREFIX = &lt;span class=&quot;string&quot;&gt;&quot;&amp;amp;&quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//很方便的通过各种不同方法获取容器中的Bean&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;Object &lt;span class=&quot;title&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String name)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; BeansException&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;T&amp;gt; &lt;span class=&quot;function&quot;&gt;T &lt;span class=&quot;title&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String name, Class&amp;lt;T&amp;gt; requiredType)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; BeansException&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;T&amp;gt; &lt;span class=&quot;function&quot;&gt;T &lt;span class=&quot;title&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Class&amp;lt;T&amp;gt; requiredType)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; BeansException&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;Object &lt;span class=&quot;title&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String name, Object... args)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; BeansException&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;T&amp;gt; &lt;span class=&quot;function&quot;&gt;T &lt;span class=&quot;title&quot;&gt;getBean&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Class&amp;lt;T&amp;gt; requiredType, Object... args)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; BeansException&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//判断容器中是否包含该名字的Bean&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;containsBean&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String name)&lt;/span&gt;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/*判断Bean的作用域：&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;prototype ：该作用域将单一 bean 的定义限制在任意数量的对象实例&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;singleton : 该作用域将 bean 的定义的限制在每一个 Spring IoC 容器中的一个单一实例(默认)。&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;*/&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;isSingleton&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String name)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; NoSuchBeanDefinitionException&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;isPrototype&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String name)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; NoSuchBeanDefinitionException&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//判断该名字对应的Bean的Class类型是否是特定的Class类型。这个Class类型可以由用户来指定&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;isTypeMatch&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String name, ResolvableType typeToMatch)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; NoSuchBeanDefinitionException&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;isTypeMatch&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(String name, Class&amp;lt;?&amp;gt; typeToMatch)&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; NoSuchBeanDefinitionException&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//得到该Bean的Class类型&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Class&amp;lt;?&amp;gt; getType(String name) &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; NoSuchBeanDefinitionException;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//查询该Bean的所有别名。这些别名都是在BeanDefinition中定义的&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;String[] getAliases(String name);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;h2 id=&quot;以XmlBeanFactory的实现来说明BeanFactory容器的设计原理&quot;&gt;&lt;a href=&quot;#以XmlBeanFactory的实现来说明BeanFactory容器的设计原理&quot; class=&quot;headerlink&quot; title=&quot;以XmlBeanFactory的实现来说明BeanFactory容器的设计原理&quot;&gt;&lt;/a&gt;以XmlBeanFactory的实现来说明BeanFactory容器的设计原理&lt;/h2&gt;&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;BeanDefinition提供了使用IoC容器的规范，在这个基础上，Spring还提供了符合这个IoC容器接口的一系列的容器的实现让我们使用。以&lt;strong&gt;XmlBeanFactory&lt;/strong&gt;的实现为例：&lt;br&gt;&lt;img src=&quot;http://7xsmif.com2.z0.glb.clouddn.com/ioc3.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;可以看到，XmlBeanFactory不像之前的ApplicationContext，后者继承了各式各样的接口，有着丰富的功能(上一篇有说明)，XmlBeanFactory只提供了最基本的IoC容器的功能。我们可以认为：&lt;strong&gt;直接的BeanFactory实现是IoC容器的基本形式，比如这个XmlBeanFactory.而各种ApplicationContext的实现则是IoC容器的高级表现形式。&lt;/strong&gt; 下面，我们就从XmlBeanFactory的实现入手分析，看看一个基本的IoC容器是怎样实现的。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;XmlBeanFactory继承自DefaultListableBeanFactory这个类，后者非常重要，是我们经常要用到的一个IoC容器的实现，在设计ApplicationContext的时候也有用到它。DefaultListableBeanFactory实际上已经包含了基本IoC容器所具有的重要功能。在Spring中实际上是把DefaultListableBeanFactory作为一个默认的功能完整的IoC容器来使用的。而XmlBeanFactory继承了它之后，又增加了新的功能：&lt;strong&gt;它是一个可以读取以XML文件定义BeanDefinition的IoC容器&lt;/strong&gt;。XmlBeanFactory又是怎样实现读取XML文件的呢？  &lt;/p&gt;
+&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;可以看到，XmlBeanFactory不像之前的ApplicationContext，后者继承了各式各样的接口，有着丰富的功能(上一篇有说明)，XmlBeanFactory只提供了最基本的IoC容器的功能。我们可以认为：&lt;strong&gt;直接的BeanFactory实现是IoC容器的基本形式，比如这个XmlBeanFactory.而各种ApplicationContext的实现则是IoC容器的高级表现形式。&lt;/strong&gt; 下面，我们就从XmlBeanFactory的实现入手分析，看看一个基本的IoC容器是怎样实现的。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;XmlBeanFactory继承自DefaultListableBeanFactory这个类，后者非常重要，是我们经常要用到的一个IoC容器的实现，在设计ApplicationContext的时候也有用到它。DefaultListableBeanFactory实际上已经包含了基本IoC容器所具有的重要功能。&lt;strong&gt;在Spring中实际上是把DefaultListableBeanFactory作为一个默认的功能完整的IoC容器来使用的&lt;/strong&gt;。而XmlBeanFactory继承了它之后，又增加了新的功能：&lt;strong&gt;它是一个可以读取以XML文件定义BeanDefinition的IoC容器&lt;/strong&gt;。XmlBeanFactory又是怎样实现读取XML文件的呢？  &lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;其实，对这些XML文件的处理并不是由XmlBeanFactory直接完成的，而是它里面初始化的一个&lt;strong&gt;XmlBeanDefinitionReader对象&lt;/strong&gt;。所以实际上是由XmlBeanDefinitionReader来完成XML文件处理的。  &lt;/li&gt;
 &lt;li&gt;在构建XmlBeanFactory这个IoC容器时，需要指定BeanDefinition的信息来源，而且这个来源需要封装成Spring中的Resource类来给出。(Resource是Spring用来封装I/O操作的类)。比如BeanDefinition是以XML文件的形式，那么可以使用像：&lt;strong&gt;ClassPath-Resource res =new ClassPathResource(“beans.xml”)&lt;/strong&gt; 这样具体的ClassPathResource来构造Resource。  &lt;/li&gt;
@@ -344,9 +367,9 @@
       <category term="设计模式" scheme="http://FlashLightNing.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
-    
       <category term="java" scheme="http://FlashLightNing.github.io/tags/java/"/>
+    
+      <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
     
   </entry>
   
@@ -454,11 +477,11 @@
     </summary>
     
     
-      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
-    
       <category term="redis" scheme="http://FlashLightNing.github.io/tags/redis/"/>
     
       <category term="json" scheme="http://FlashLightNing.github.io/tags/json/"/>
+    
+      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
@@ -510,9 +533,9 @@
     </summary>
     
     
-      <category term="maven" scheme="http://FlashLightNing.github.io/tags/maven/"/>
-    
       <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="maven" scheme="http://FlashLightNing.github.io/tags/maven/"/>
     
   </entry>
   

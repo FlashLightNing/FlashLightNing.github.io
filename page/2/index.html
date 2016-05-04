@@ -260,6 +260,131 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/07/混沌序列图像加密传输/" itemprop="url">
+                  混沌序列图像加密传输总结（1）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-07T22:02:40+08:00" content="2016-04-07">
+              2016-04-07
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/07/混沌序列图像加密传输/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/07/混沌序列图像加密传输/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/04/07/混沌序列图像加密传输/" class="leancloud_visitors" data-flag-title="混沌序列图像加密传输总结（1）">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><strong>离散时间混沌序列图像加密解密大致有以下几个步骤:</strong></p>
+<ul>
+<li><a href="http://baike.baidu.com/link?url=DJKZliiFPW-M_9jVWjt99glbS0RryObOFWuA6Nt2ZN-SfzdE3VNYO5jqgShK5ob0EJ9GGqlG0ncFhmWzaqGpu_">猫脸映射(也叫Arnold变换)</a></li>
+<li>混沌加密</li>
+<li>混沌解密</li>
+<li>猫脸逆映射</li>
+</ul>
+<p>踩了以下几个坑：</p>
+<ul>
+<li><strong>如何读取图片将其转为像素数组</strong></li>
+<li><strong>如何将处理好的像素数组转为图片</strong></li>
+<li><strong>ImageIO.read(File file) =null的情况，但是图片文件却又是真实存在</strong></li>
+<li><strong>循环迭代猫脸映射的时候，用数组1=数组2的方式，使得两个数组的引用是一样的，而导致修改数组1引起数组2的改变，然后发现映射出错。</strong></li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/07/混沌序列图像加密传输/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/07/About-Blog/" itemprop="url">
                   About Blog
                 </a>
@@ -321,7 +446,7 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="http://7xsmif.com2.z0.glb.clouddn.com/read.jpg" rel="gallery_cinqa01g00003kklz71sv2g03"
+                 href="http://7xsmif.com2.z0.glb.clouddn.com/read.jpg" rel="gallery_cint147k90001eklzebhpmu2r"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
                 <img src="http://7xsmif.com2.z0.glb.clouddn.com/read.jpg" itemprop="contentUrl"/>
               </a>
@@ -412,7 +537,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -420,7 +545,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>

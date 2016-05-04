@@ -90,7 +90,7 @@
 <meta property="og:description" content="IoC容器系列的设计与实现概要&amp;#160; &amp;#160; &amp;#160; &amp;#160;博客介绍了BeanFactory这个容器的基本接口，如getBean(String name)，containsBean(String name)等等，但是这些接口并没有具体的实现，因此给出了XmlBeanFactory容器的实现过程,还用编程的方式使用了DefaultListableBeanFactory这个容器">
 <meta property="og:image" content="http://7xsmif.com2.z0.glb.clouddn.com/ioc3.png">
 <meta property="og:image" content="http://7xsmif.com2.z0.glb.clouddn.com/app1.png">
-<meta property="og:updated_time" content="2016-05-02T17:24:02.203Z">
+<meta property="og:updated_time" content="2016-05-03T05:02:18.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读《Spring-技术内幕》 第二章：IoC容器的实现-2">
 <meta name="twitter:description" content="IoC容器系列的设计与实现概要&amp;#160; &amp;#160; &amp;#160; &amp;#160;博客介绍了BeanFactory这个容器的基本接口，如getBean(String name)，containsBean(String name)等等，但是这些接口并没有具体的实现，因此给出了XmlBeanFactory容器的实现过程,还用编程的方式使用了DefaultListableBeanFactory这个容器">
@@ -340,7 +340,7 @@
 <a id="more"></a>
 <h2 id="BeanFactory的应用场景"><a href="#BeanFactory的应用场景" class="headerlink" title="BeanFactory的应用场景"></a>BeanFactory的应用场景</h2><p>&#160; &#160; &#160; &#160;正如上一篇所提到的，BeanFactory提供的是最基本的IoC容器的功能。BeanFactory接口定义了IoC容器最基本的形式。很显然，Spring并没有给出容器的具体实现。下面来看看Spring是怎样定义IoC容器的基本接口的。<br>&#160; &#160; &#160; &#160;首先最基本的是设计了getBean方法，这个方法是使用IoC容器API的主要方法。通过这个方法，可以取得这个容器管理的Bean(通过指定名字来索引)，取得了Bean之后，就可以应用在程序之中。<br>BeanFactory接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanFactory</span> </span>&#123;</span><br><span class="line">String FACTORY_BEAN_PREFIX = <span class="string">"&amp;"</span>;</span><br><span class="line"><span class="comment">//很方便的通过各种不同方法获取容器中的Bean</span></span><br><span class="line"><span class="function">Object <span class="title">getBean</span><span class="params">(String name)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line">&lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(String name, Class&lt;T&gt; requiredType)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line">&lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(Class&lt;T&gt; requiredType)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"><span class="function">Object <span class="title">getBean</span><span class="params">(String name, Object... args)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line">&lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(Class&lt;T&gt; requiredType, Object... args)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line"><span class="comment">//判断容器中是否包含该名字的Bean</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">containsBean</span><span class="params">(String name)</span></span>;</span><br><span class="line"><span class="comment">/*判断Bean的作用域：</span><br><span class="line">prototype ：该作用域将单一 bean 的定义限制在任意数量的对象实例</span><br><span class="line">singleton : 该作用域将 bean 的定义的限制在每一个 Spring IoC 容器中的一个单一实例(默认)。</span><br><span class="line">*/</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">(String name)</span> <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;</span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isPrototype</span><span class="params">(String name)</span> <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;</span><br><span class="line"><span class="comment">//判断该名字对应的Bean的Class类型是否是特定的Class类型。这个Class类型可以由用户来指定</span></span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isTypeMatch</span><span class="params">(String name, ResolvableType typeToMatch)</span> <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;</span><br><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">isTypeMatch</span><span class="params">(String name, Class&lt;?&gt; typeToMatch)</span> <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;</span><br><span class="line"><span class="comment">//得到该Bean的Class类型</span></span><br><span class="line">Class&lt;?&gt; getType(String name) <span class="keyword">throws</span> NoSuchBeanDefinitionException;</span><br><span class="line"><span class="comment">//查询该Bean的所有别名。这些别名都是在BeanDefinition中定义的</span></span><br><span class="line">String[] getAliases(String name);</span><br></pre></td></tr></table></figure></p>
 <h2 id="以XmlBeanFactory的实现来说明BeanFactory容器的设计原理"><a href="#以XmlBeanFactory的实现来说明BeanFactory容器的设计原理" class="headerlink" title="以XmlBeanFactory的实现来说明BeanFactory容器的设计原理"></a>以XmlBeanFactory的实现来说明BeanFactory容器的设计原理</h2><p>&#160; &#160; &#160; &#160;BeanDefinition提供了使用IoC容器的规范，在这个基础上，Spring还提供了符合这个IoC容器接口的一系列的容器的实现让我们使用。以<strong>XmlBeanFactory</strong>的实现为例：<br><img src="http://7xsmif.com2.z0.glb.clouddn.com/ioc3.png"></p>
-<p>&#160; &#160; &#160; &#160;可以看到，XmlBeanFactory不像之前的ApplicationContext，后者继承了各式各样的接口，有着丰富的功能(上一篇有说明)，XmlBeanFactory只提供了最基本的IoC容器的功能。我们可以认为：<strong>直接的BeanFactory实现是IoC容器的基本形式，比如这个XmlBeanFactory.而各种ApplicationContext的实现则是IoC容器的高级表现形式。</strong> 下面，我们就从XmlBeanFactory的实现入手分析，看看一个基本的IoC容器是怎样实现的。<br>&#160; &#160; &#160; &#160;XmlBeanFactory继承自DefaultListableBeanFactory这个类，后者非常重要，是我们经常要用到的一个IoC容器的实现，在设计ApplicationContext的时候也有用到它。DefaultListableBeanFactory实际上已经包含了基本IoC容器所具有的重要功能。在Spring中实际上是把DefaultListableBeanFactory作为一个默认的功能完整的IoC容器来使用的。而XmlBeanFactory继承了它之后，又增加了新的功能：<strong>它是一个可以读取以XML文件定义BeanDefinition的IoC容器</strong>。XmlBeanFactory又是怎样实现读取XML文件的呢？  </p>
+<p>&#160; &#160; &#160; &#160;可以看到，XmlBeanFactory不像之前的ApplicationContext，后者继承了各式各样的接口，有着丰富的功能(上一篇有说明)，XmlBeanFactory只提供了最基本的IoC容器的功能。我们可以认为：<strong>直接的BeanFactory实现是IoC容器的基本形式，比如这个XmlBeanFactory.而各种ApplicationContext的实现则是IoC容器的高级表现形式。</strong> 下面，我们就从XmlBeanFactory的实现入手分析，看看一个基本的IoC容器是怎样实现的。<br>&#160; &#160; &#160; &#160;XmlBeanFactory继承自DefaultListableBeanFactory这个类，后者非常重要，是我们经常要用到的一个IoC容器的实现，在设计ApplicationContext的时候也有用到它。DefaultListableBeanFactory实际上已经包含了基本IoC容器所具有的重要功能。<strong>在Spring中实际上是把DefaultListableBeanFactory作为一个默认的功能完整的IoC容器来使用的</strong>。而XmlBeanFactory继承了它之后，又增加了新的功能：<strong>它是一个可以读取以XML文件定义BeanDefinition的IoC容器</strong>。XmlBeanFactory又是怎样实现读取XML文件的呢？  </p>
 <ol>
 <li>其实，对这些XML文件的处理并不是由XmlBeanFactory直接完成的，而是它里面初始化的一个<strong>XmlBeanDefinitionReader对象</strong>。所以实际上是由XmlBeanDefinitionReader来完成XML文件处理的。  </li>
 <li>在构建XmlBeanFactory这个IoC容器时，需要指定BeanDefinition的信息来源，而且这个来源需要封装成Spring中的Resource类来给出。(Resource是Spring用来封装I/O操作的类)。比如BeanDefinition是以XML文件的形式，那么可以使用像：<strong>ClassPath-Resource res =new ClassPathResource(“beans.xml”)</strong> 这样具体的ClassPathResource来构造Resource。  </li>
@@ -418,6 +418,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/05/04/鸟枪换炮/" rel="prev" title="鸟枪换炮">
+                鸟枪换炮 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -488,7 +492,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -496,7 +500,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
