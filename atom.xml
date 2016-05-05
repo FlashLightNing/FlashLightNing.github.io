@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://FlashLightNing.github.io/"/>
-  <updated>2016-05-05T05:56:15.283Z</updated>
+  <updated>2016-05-05T16:47:16.596Z</updated>
   <id>http://FlashLightNing.github.io/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习方式的思考</title>
+    <link href="http://FlashLightNing.github.io/2016/05/06/%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%BC%8F%E7%9A%84%E6%80%9D%E8%80%83/"/>
+    <id>http://FlashLightNing.github.io/2016/05/06/学习方式的思考/</id>
+    <published>2016-05-05T16:34:58.000Z</published>
+    <updated>2016-05-05T16:47:16.596Z</updated>
+    
+    <content type="html">&lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;看了一个星期左右的《Spring技术内幕》，书中都以讲源码为主，硬着头皮看倒是也能看下去，但是感觉这样看有点脱离我的现状。网上看到说对技术框架的学习，大体分为三个阶段，觉得蛮有道理：  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;基础开发，主要是了解API、基于API完成应用&lt;/strong&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;熟悉内核及原理，主要是了解框架的设计原理，阅读源码，洞悉内在机理&lt;/strong&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优化框架，主要是针对框架的已有功能的不足进行完善、优化，或者使用框架提供的机制扩展框架功能，或者对框架进行定制，让它适合特定情境&lt;/strong&gt;&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;我现在还是停留在第一个阶段，连第一个阶段尚且都不能完全应对，就直接去看源码，确实有点脱离我目前的现状。所以毅然决定还是先打好第一步的基础，然后在应用这些api的时候，可以去顺带了解一下它的原理，加深理解。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;这时候就需要另一本电子书了：《轻量级Java EE企业应用实战》，所以转变学习思路，先把基础api了解应用一下，再去做进一步的深入了解。&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;实在是硬着头皮看不下去了(┬＿┬)&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;看了一个星期左右的《Spring技术内幕》，书中都以讲源码为主，硬着头皮看倒是也能看下去，但是感觉这样看有点脱离我的现状。网上看到说对技术框架的学习，大体分为三个阶段，觉得蛮有道理：  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;st
+    
+    </summary>
+    
+      <category term="reading" scheme="http://FlashLightNing.github.io/categories/reading/"/>
+    
+    
+      <category term="生活" scheme="http://FlashLightNing.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>读《Spring技术内幕》 总结3:IoC容器的初始化过程</title>
@@ -409,9 +439,9 @@
       <category term="设计模式" scheme="http://FlashLightNing.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
-    
       <category term="java" scheme="http://FlashLightNing.github.io/tags/java/"/>
+    
+      <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
     
   </entry>
   
@@ -519,11 +549,11 @@
     </summary>
     
     
-      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
-    
       <category term="redis" scheme="http://FlashLightNing.github.io/tags/redis/"/>
     
       <category term="json" scheme="http://FlashLightNing.github.io/tags/json/"/>
+    
+      <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
     
   </entry>
   
@@ -575,9 +605,9 @@
     </summary>
     
     
-      <category term="maven" scheme="http://FlashLightNing.github.io/tags/maven/"/>
-    
       <category term="入门" scheme="http://FlashLightNing.github.io/tags/%E5%85%A5%E9%97%A8/"/>
+    
+      <category term="maven" scheme="http://FlashLightNing.github.io/tags/maven/"/>
     
   </entry>
   
