@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Boom">
 <meta property="og:description" content="博客概要&amp;#160; &amp;#160; &amp;#160; &amp;#160;本篇只是结合编程式使用DefaultListableBeanFactory的代码，简单得描述了一下IOC容器初始化的过程，分为3个步骤：Resource定位，载入BeanDefinition,注册这些Bean 。以及Spring中初始化的过程和依赖注入的过程是分开的，只有在对bean设置过lazy-init的情况下可能会使依赖注入在容器">
 <meta property="og:image" content="http://7xsmif.com2.z0.glb.clouddn.com/beanDefinitionRegistry.png">
-<meta property="og:updated_time" content="2016-05-05T05:55:00.270Z">
+<meta property="og:updated_time" content="2016-05-05T05:56:15.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读《Spring技术内幕》 总结3:IoC容器的初始化过程">
 <meta name="twitter:description" content="博客概要&amp;#160; &amp;#160; &amp;#160; &amp;#160;本篇只是结合编程式使用DefaultListableBeanFactory的代码，简单得描述了一下IOC容器初始化的过程，分为3个步骤：Resource定位，载入BeanDefinition,注册这些Bean 。以及Spring中初始化的过程和依赖注入的过程是分开的，只有在对bean设置过lazy-init的情况下可能会使依赖注入在容器">
@@ -348,8 +348,9 @@
 <p>&#160; &#160; &#160; &#160;可以看到，在DefaultListableBeanFactory内部是通过将这些BeanDefinition放入HashMap中进行管理的。<br>&#160; &#160; &#160; &#160;需要注意的是，<strong>在这个IoC容器初始化的过程中，一般不包含Bean依赖注入的实现</strong>. 在Spring IoC的设计中，Bean定义的载入和依赖注入是两个独立的过程。<strong>依赖注入一般发生在应用第一次通过getBean向IoC容器索取Bean的时候</strong>。但是也有例外，那就是设置了lazy-init值(延迟加载)的时候.  </p>
 <ol>
 <li>首先说说lazy-init是干嘛的？ 如果 lazy-init=”true” 表示我们需要这个Bean延迟加载，那么在IoC初始化的时候就不会实例化这个Bean，直到你索要的时候( getBean(String name) )才会实例化.如果没设置，默认是false -&gt;不延迟加载，所以默认会初始化这些Bean，可能导致Spring启动速度很慢  </li>
-<li>那么，如果有2个Bean:bean1,bean2。<strong> bean1是延迟加载，bean2没有， bean2里面依赖bean1。 然后bean2在容器初始化的时候就实例化了，那么这会导致bean1也会实例化而不是延迟加载。</strong>因为容器在实例化bean2的时候，如果bean1没有实例化，那bean2怎么依赖它，所以必须使得bean2也实例化。<br>&#160; &#160; &#160; &#160;因此，如果Ioc容器在启动的时候创建了那些设置为延迟实例化的bean的实例，你也不要觉得奇怪，因为那些延迟初始化的bean可能在配置的某个地方被注入到了一个非延迟初始化singleton bean里面。<br>&#160; &#160; &#160; &#160;<strong>如果两个bean:bean1,bean2,bean2依赖bean1，只要bean2没设置lazy-init(缺省是false)或者设置为lazy-init=false，那么它的依赖注入会在第一次调用bean2的时候才发生。只有bean2设置了为true,依赖注入就会在IoC初始化的时候发生</strong><br>&#160; &#160; &#160; &#160;结论： 因此，在这个IoC容器初始化的过程中，一般是不包含Bean依赖注入的</li>
+<li>那么，如果有2个Bean:bean1,bean2。<strong> bean1是延迟加载，bean2没有， bean2里面依赖bean1。 然后bean2在容器初始化的时候就实例化了，那么这会导致bean1也会实例化而不是延迟加载。</strong>因为容器在实例化bean2的时候，如果bean1没有实例化，那bean2怎么依赖它，所以必须使得bean2也实例化。</li>
 </ol>
+<p>&#160; &#160; &#160; &#160;因此，如果Ioc容器在启动的时候创建了那些设置为延迟实例化的bean的实例，你也不要觉得奇怪，因为那些延迟初始化的bean可能在配置的某个地方被注入到了一个非延迟初始化singleton bean里面。<br>&#160; &#160; &#160; &#160;<strong>如果两个bean:bean1,bean2,bean2依赖bean1，只要bean2没设置lazy-init(缺省是false)或者设置为lazy-init=false，那么它的依赖注入会在第一次调用bean2的时候才发生。只有bean2设置了为true,依赖注入就会在IoC初始化的时候发生</strong><br>&#160; &#160; &#160; &#160;结论： 因此，在这个IoC容器初始化的过程中，一般是不包含Bean依赖注入的</p>
 
       
     </div>
