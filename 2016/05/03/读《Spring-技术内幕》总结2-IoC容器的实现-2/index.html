@@ -84,15 +84,15 @@
 
 <meta name="description" content="IoC容器系列的设计与实现概要&amp;#160; &amp;#160; &amp;#160; &amp;#160;博客介绍了BeanFactory这个容器的基本接口，如getBean(String name)，containsBean(String name)等等，但是这些接口并没有具体的实现，因此给出了XmlBeanFactory容器的实现过程,还用编程的方式使用了DefaultListableBeanFactory这个容器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读《Spring-技术内幕》 第二章：IoC容器的实现-2">
-<meta property="og:url" content="http://FlashLightNing.github.io/2016/05/03/读《Spring-技术内幕》-第二章：IoC容器的实现-2/index.html">
+<meta property="og:title" content="读《Spring-技术内幕》 总结2:IoC容器的实现-2">
+<meta property="og:url" content="http://FlashLightNing.github.io/2016/05/03/读《Spring-技术内幕》总结2-IoC容器的实现-2/index.html">
 <meta property="og:site_name" content="Boom">
 <meta property="og:description" content="IoC容器系列的设计与实现概要&amp;#160; &amp;#160; &amp;#160; &amp;#160;博客介绍了BeanFactory这个容器的基本接口，如getBean(String name)，containsBean(String name)等等，但是这些接口并没有具体的实现，因此给出了XmlBeanFactory容器的实现过程,还用编程的方式使用了DefaultListableBeanFactory这个容器">
 <meta property="og:image" content="http://7xsmif.com2.z0.glb.clouddn.com/ioc3.png">
 <meta property="og:image" content="http://7xsmif.com2.z0.glb.clouddn.com/app1.png">
-<meta property="og:updated_time" content="2016-05-03T05:02:18.502Z">
+<meta property="og:updated_time" content="2016-05-05T05:45:41.594Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读《Spring-技术内幕》 第二章：IoC容器的实现-2">
+<meta name="twitter:title" content="读《Spring-技术内幕》 总结2:IoC容器的实现-2">
 <meta name="twitter:description" content="IoC容器系列的设计与实现概要&amp;#160; &amp;#160; &amp;#160; &amp;#160;博客介绍了BeanFactory这个容器的基本接口，如getBean(String name)，containsBean(String name)等等，但是这些接口并没有具体的实现，因此给出了XmlBeanFactory容器的实现过程,还用编程的方式使用了DefaultListableBeanFactory这个容器">
 <meta name="twitter:image" content="http://7xsmif.com2.z0.glb.clouddn.com/ioc3.png">
 
@@ -112,7 +112,7 @@
   };
 </script>
 
-  <title> 读《Spring-技术内幕》 第二章：IoC容器的实现-2 | Boom </title>
+  <title> 读《Spring-技术内幕》 总结2:IoC容器的实现-2 | Boom </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +261,7 @@
             
             
               
-                读《Spring-技术内幕》 第二章：IoC容器的实现-2
+                读《Spring-技术内幕》 总结2:IoC容器的实现-2
               
             
           </h1>
@@ -303,8 +303,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/03/读《Spring-技术内幕》-第二章：IoC容器的实现-2/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/03/读《Spring-技术内幕》-第二章：IoC容器的实现-2/" itemprop="commentsCount"></span>
+                <a href="/2016/05/03/读《Spring-技术内幕》总结2-IoC容器的实现-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/03/读《Spring-技术内幕》总结2-IoC容器的实现-2/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -314,7 +314,7 @@
 
           
           
-             <span id="/2016/05/03/读《Spring-技术内幕》-第二章：IoC容器的实现-2/" class="leancloud_visitors" data-flag-title="读《Spring-技术内幕》 第二章：IoC容器的实现-2">
+             <span id="/2016/05/03/读《Spring-技术内幕》总结2-IoC容器的实现-2/" class="leancloud_visitors" data-flag-title="读《Spring-技术内幕》 总结2:IoC容器的实现-2">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -410,8 +410,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/01/读《Spring-技术内幕》-第二章：IoC容器的实现-1/" rel="next" title="读《Spring 技术内幕》 第二章：IoC容器的实现 (1)">
-                <i class="fa fa-chevron-left"></i> 读《Spring 技术内幕》 第二章：IoC容器的实现 (1)
+              <a href="/2016/05/01/读《Spring-技术内幕》-总结1-IoC容器的实现-1/" rel="next" title="读《Spring 技术内幕》 总结1:IoC容器的实现 (1)">
+                <i class="fa fa-chevron-left"></i> 读《Spring 技术内幕》 总结1:IoC容器的实现 (1)
               </a>
             
           </div>
@@ -446,8 +446,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/03/读《Spring-技术内幕》-第二章：IoC容器的实现-2/"
-           data-title="读《Spring-技术内幕》 第二章：IoC容器的实现-2" data-url="http://FlashLightNing.github.io/2016/05/03/读《Spring-技术内幕》-第二章：IoC容器的实现-2/">
+      <div class="ds-thread" data-thread-key="2016/05/03/读《Spring-技术内幕》总结2-IoC容器的实现-2/"
+           data-title="读《Spring-技术内幕》 总结2:IoC容器的实现-2" data-url="http://FlashLightNing.github.io/2016/05/03/读《Spring-技术内幕》总结2-IoC容器的实现-2/">
       </div>
     
   </div>
