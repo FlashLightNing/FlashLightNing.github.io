@@ -260,6 +260,118 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/04/redis实现分布式锁的一次实践/" itemprop="url">
+                  redis实现分布式锁
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-04T11:10:40+08:00" content="2016-12-04">
+              2016-12-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/04/redis实现分布式锁的一次实践/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/04/redis实现分布式锁的一次实践/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/04/redis实现分布式锁的一次实践/" class="leancloud_visitors" data-flag-title="redis实现分布式锁">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="背景："><a href="#背景：" class="headerlink" title="背景："></a>背景：</h2><p>&#160; &#160; &#160; &#160;假设有这样一个场景：用户在APP上点击下单的时候，会跳到一个地址管理页面，其中保存着自己的地址。如果用户之前没有添加过地址，那么他添加的第一个地址就会被设置为默认地址。同时，每一个用户有且只有一个默认地址。那么，这个添加地址的接口实现应该大致是这样：先判断当前用户在数据库中的地址数量，如果是0，则将当前添加的地址设置为默认地址，否则，则设置为非默认地址。 </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/04/redis实现分布式锁的一次实践/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/06/学习方式的思考/" itemprop="url">
                   学习方式的思考
                 </a>
@@ -1389,118 +1501,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/12/redis简单使用及用JSON字符串的方式解决对象存储问题/" itemprop="url">
-                  redis简单使用及用JSON字符串的方式解决对象存储问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-12T17:39:31+08:00" content="2016-04-12">
-              2016-04-12
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/12/redis简单使用及用JSON字符串的方式解决对象存储问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/12/redis简单使用及用JSON字符串的方式解决对象存储问题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/12/redis简单使用及用JSON字符串的方式解决对象存储问题/" class="leancloud_visitors" data-flag-title="redis简单使用及用JSON字符串的方式解决对象存储问题">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p> &#160; &#160; &#160; &#160;想在windows下使用熟悉一下redis，首先在它的github上下载压缩包：<a href="https://github.com/dmajkic/redis">https://github.com/dmajkic/redis</a>  下载到本地之后解压缩打开，里面有32位和64位2个文件夹，我的是64位系统，所以把64-bit文件夹里面的文件复制到最外层目录（D：/redis）下，然后就可以开始安装配置了。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/12/redis简单使用及用JSON字符串的方式解决对象存储问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1546,7 +1546,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1563,7 +1563,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
