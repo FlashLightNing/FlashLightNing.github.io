@@ -109,9 +109,9 @@
         <title>读《Spring技术内幕》 总结3:IoC容器的初始化过程</title>
         <pubTime>2016-05-05T05:11:36.000Z</pubTime>
         
-        <tag>reading</tag>
-         
         <tag>Java</tag>
+         
+        <tag>reading</tag>
          
         <tag>Spring</tag>
          
@@ -133,9 +133,9 @@
         <title>读《Spring-技术内幕》 总结2:IoC容器的实现-2</title>
         <pubTime>2016-05-02T16:39:50.000Z</pubTime>
         
-        <tag>reading</tag>
-         
         <tag>Java</tag>
+         
+        <tag>reading</tag>
          
         <tag>Spring</tag>
          
@@ -157,9 +157,9 @@
         <title>读《Spring 技术内幕》 总结1:IoC容器的实现 (1)</title>
         <pubTime>2016-04-30T17:35:58.000Z</pubTime>
         
-        <tag>reading</tag>
-         
         <tag>Java</tag>
+         
+        <tag>reading</tag>
          
         <tag>Spring</tag>
          
@@ -206,23 +206,6 @@
              
               <breadCrumb title="reading" url="http://FlashLightNing.github.io/categories/reading/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://FlashLightNing.github.io/2016/04/07/About-Blog/</loc>
-    <lastmod>2016-04-30T08:29:07.490Z</lastmod>
-    <data>
-        <display>
-        <title>About Blog</title>
-        <pubTime>2016-04-06T16:45:38.000Z</pubTime>
-        
-        <tag>生活</tag>
-         
-         
-           
         </display>
     </data>
     </url>
