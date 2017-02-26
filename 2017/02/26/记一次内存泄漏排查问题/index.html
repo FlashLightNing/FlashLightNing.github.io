@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -82,15 +82,23 @@
 
 
 
-<meta name="description" content="I am sb">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Boom">
-<meta property="og:url" content="http://FlashLightNing.github.io/archives/2016/04/index.html">
+<meta name="description" content="背景&amp;#160; &amp;#160; &amp;#160;在使用JavaCV做图像处理时，发现程序运行起来之后，处理了百来次的时候，就报了outofmemory的错误。因为javacv底层就是调用opencv的native方法，判断是出现了内存泄漏问题，可能是调用了哪个方法之后没有正确释放资源。
+1.用jconsole观察&amp;#160; &amp;#160; &amp;#160;首先是需要在测试机器上修改启动命令，使得能够支持j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次内存泄漏排查问题">
+<meta property="og:url" content="http://FlashLightNing.github.io/2017/02/26/记一次内存泄漏排查问题/index.html">
 <meta property="og:site_name" content="Boom">
-<meta property="og:description" content="I am sb">
+<meta property="og:description" content="背景&amp;#160; &amp;#160; &amp;#160;在使用JavaCV做图像处理时，发现程序运行起来之后，处理了百来次的时候，就报了outofmemory的错误。因为javacv底层就是调用opencv的native方法，判断是出现了内存泄漏问题，可能是调用了哪个方法之后没有正确释放资源。
+1.用jconsole观察&amp;#160; &amp;#160; &amp;#160;首先是需要在测试机器上修改启动命令，使得能够支持j">
+<meta property="og:image" content="http://7xsmif.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720170226203723.png">
+<meta property="og:image" content="leanote://file/getImage?fileId=58b2d2872b94f0554d000000">
+<meta property="og:image" content="http://7xsmif.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720170226203741.png">
+<meta property="og:updated_time" content="2017-02-26T13:19:38.225Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Boom">
-<meta name="twitter:description" content="I am sb">
+<meta name="twitter:title" content="记一次内存泄漏排查问题">
+<meta name="twitter:description" content="背景&amp;#160; &amp;#160; &amp;#160;在使用JavaCV做图像处理时，发现程序运行起来之后，处理了百来次的时候，就报了outofmemory的错误。因为javacv底层就是调用opencv的native方法，判断是出现了内存泄漏问题，可能是调用了哪个方法之后没有正确释放资源。
+1.用jconsole观察&amp;#160; &amp;#160; &amp;#160;首先是需要在测试机器上修改启动命令，使得能够支持j">
+<meta name="twitter:image" content="http://7xsmif.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720170226203723.png">
 
 
 
@@ -108,7 +116,7 @@
   };
 </script>
 
-  <title> 归档 | Boom </title>
+  <title> 记一次内存泄漏排查问题 | Boom </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -148,7 +156,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,362 +244,140 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 18 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/30/读书计划-Spring技术内幕/" itemprop="url">
-              
-                <span itemprop="name">读书计划-Spring技术内幕</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-30T18:07:36+08:00"
-              content="2016-04-30" >
-          04-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/26/细数JDK里的设计模式/" itemprop="url">
-              
-                <span itemprop="name">细数JDK里的设计模式</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-26T23:02:04+08:00"
-              content="2016-04-26" >
-          04-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/25/设计模式-观察者模式-Observer/" itemprop="url">
-              
-                <span itemprop="name">设计模式:观察者模式(Observer)</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-25T15:26:41+08:00"
-              content="2016-04-25" >
-          04-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/21/单例模式5种实现方式/" itemprop="url">
-              
-                <span itemprop="name">设计模式:单例模式5种实现方式</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-21T23:13:10+08:00"
-              content="2016-04-21" >
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/12/redis简单使用及用JSON字符串的方式解决对象存储问题/" itemprop="url">
-              
-                <span itemprop="name">redis简单使用及用JSON字符串的方式解决对象存储问题</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-12T17:39:31+08:00"
-              content="2016-04-12" >
-          04-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/11/Maven下载-配置-创建项目/" itemprop="url">
-              
-                <span itemprop="name">Maven下载,配置,创建项目</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-11T17:57:16+08:00"
-              content="2016-04-11" >
-          04-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/07/混沌图像加密总结-2/" itemprop="url">
-              
-                <span itemprop="name">混沌图像加密总结(2)</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-07T23:32:43+08:00"
-              content="2016-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/07/混沌序列图像加密传输/" itemprop="url">
-              
-                <span itemprop="name">混沌序列图像加密传输总结（1）</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-07T22:02:40+08:00"
-              content="2016-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/04/07/About-Blog/" itemprop="url">
-              
-                <span itemprop="name">About Blog</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-04-07T00:45:38+08:00"
-              content="2016-04-07" >
-          04-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                记一次内存泄漏排查问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-26T21:18:14+08:00" content="2017-02-26">
+              2017-02-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/26/记一次内存泄漏排查问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/26/记一次内存泄漏排查问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/26/记一次内存泄漏排查问题/" class="leancloud_visitors" data-flag-title="记一次内存泄漏排查问题">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>&#160; &#160; &#160;在使用<a href="http://baike.baidu.com/link?url=Tm05p-GxF6PfTuiDzevm8zLTI7jjVdp-EDHMO23JkyWHpqMD7AncZT_TCNpquWHBKzK-t7ji3RbwGId25uydZa" target="_blank" rel="external">JavaCV</a>做图像处理时，发现程序运行起来之后，处理了百来次的时候，就报了outofmemory的错误。因为javacv底层就是调用opencv的native方法，判断是出现了内存泄漏问题，可能是调用了哪个方法之后没有正确释放资源。</p>
+<h3 id="1-用jconsole观察"><a href="#1-用jconsole观察" class="headerlink" title="1.用jconsole观察"></a>1.用jconsole观察</h3><p>&#160; &#160; &#160;首先是需要在测试机器上修改启动命令，使得能够支持jconsole远程连接。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-Dcom.sun.management.jmxremote.port=8999 \  </span><br><span class="line">-Dcom.sun.management.jmxremote.authenticate=false \  </span><br><span class="line">-Dcom.sun.management.jmxremote.ssl=false</span><br></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160;这样，启动本地java安装目录bin下的jconsole.exe启动界面，输入远程主机的IP和8999端口，就可以连接上了。<br><img src="http://7xsmif.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720170226203723.png"><br>&#160; &#160; &#160;<strong>这个图是正常的垃圾回收。当时的图是只有上升，没有下降的一个过程，然后到顶点就产生了outofmemory错误。</strong></p>
+<h3 id="2-排查"><a href="#2-排查" class="headerlink" title="2.排查"></a>2.排查</h3><p>&#160; &#160; &#160;网上查询了一下内存泄漏的分析工具，给eclipse安装了MAT插件用于分析文件。为了生成hprof文件,在测试机器上多次调用方法，直到根据jconsole发现快到顶点了，运行以下命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jmap -dump:format=b,file=a.hprof  24957</span><br><span class="line">//后面的24957是进程ID可用下面命令get</span><br><span class="line">ps -ef|grep java</span><br><span class="line">然后找到项目名对应的pid即可</span><br></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160;生成的文件直接用装了MAT插件的eclipse打开即可：<br><img src="leanote://file/getImage?fileId=58b2d2872b94f0554d000000" alt=""><br>&#160; &#160; &#160;可以看到图中很明显的第三方库的类名，就可以判断可能是在用该类的地方的资源没释放，然后对应地查找。当然MAT和jconsole还有更强大的功能等着大家去使用。<br>&#160; &#160; &#160;这里说一句题外话，在使用这几个类的地方，发现用完之后已经调用了释放方法，很是奇怪，也没头绪。后面想到跟javacv给的sample code对比一下，发现网上流传的释放方法和样例中的并不一致，改成样例中的方法之后，解决了该问题。<strong>得到的教训是如果第三方库有给示例代码，还是得多参考示例代码。</strong><br>&#160; &#160; &#160;最终再用jconsole连接机器，观察内存回收，就得到了上面那个图。还有下面这个图：<br><img src="http://7xsmif.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720170226203741.png"><br>&#160; &#160; &#160;这里看到使用的回收算法是新生代是parNew,老年代是CMS。顺势复习了一波垃圾回收算法，做了下面这样一个图片：<br>&#160; &#160; &#160;链接：<a href="https://www.processon.com/view/587a409de4b098bf4ca43bf7" target="_blank" rel="external">https://www.processon.com/view/587a409de4b098bf4ca43bf7</a></p>
+
+      
+    </div>
+    
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/19/TCP-IP协议卷解一各章节导图/" rel="next" title="TCP/IP协议卷解一各章节导图">
+                <i class="fa fa-chevron-left"></i> TCP/IP协议卷解一各章节导图
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -599,6 +385,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/26/记一次内存泄漏排查问题/"
+           data-title="记一次内存泄漏排查问题" data-url="http://FlashLightNing.github.io/2017/02/26/记一次内存泄漏排查问题/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -618,8 +412,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/upload/lumingfeng.png"
@@ -687,6 +490,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-用jconsole观察"><span class="nav-number">2.</span> <span class="nav-text">1.用jconsole观察</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-排查"><span class="nav-number">3.</span> <span class="nav-text">2.排查</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -783,11 +597,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   

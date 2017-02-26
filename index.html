@@ -260,6 +260,120 @@
             
               
                 
+                <a class="post-title-link" href="/2017/02/26/记一次内存泄漏排查问题/" itemprop="url">
+                  记一次内存泄漏排查问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-26T21:18:14+08:00" content="2017-02-26">
+              2017-02-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/26/记一次内存泄漏排查问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/26/记一次内存泄漏排查问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/26/记一次内存泄漏排查问题/" class="leancloud_visitors" data-flag-title="记一次内存泄漏排查问题">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>&#160; &#160; &#160;在使用<a href="http://baike.baidu.com/link?url=Tm05p-GxF6PfTuiDzevm8zLTI7jjVdp-EDHMO23JkyWHpqMD7AncZT_TCNpquWHBKzK-t7ji3RbwGId25uydZa" target="_blank" rel="external">JavaCV</a>做图像处理时，发现程序运行起来之后，处理了百来次的时候，就报了outofmemory的错误。因为javacv底层就是调用opencv的native方法，判断是出现了内存泄漏问题，可能是调用了哪个方法之后没有正确释放资源。</p>
+<h3 id="1-用jconsole观察"><a href="#1-用jconsole观察" class="headerlink" title="1.用jconsole观察"></a>1.用jconsole观察</h3><p>&#160; &#160; &#160;首先是需要在测试机器上修改启动命令，使得能够支持jconsole远程连接。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-Dcom.sun.management.jmxremote.port=8999 \  </span><br><span class="line">-Dcom.sun.management.jmxremote.authenticate=false \  </span><br><span class="line">-Dcom.sun.management.jmxremote.ssl=false</span><br></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160;这样，启动本地java安装目录bin下的jconsole.exe启动界面，输入远程主机的IP和8999端口，就可以连接上了。<br><img src="http://7xsmif.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720170226203723.png"><br>&#160; &#160; &#160;<strong>这个图是正常的垃圾回收。当时的图是只有上升，没有下降的一个过程，然后到顶点就产生了outofmemory错误。</strong></p>
+<h3 id="2-排查"><a href="#2-排查" class="headerlink" title="2.排查"></a>2.排查</h3><p>&#160; &#160; &#160;网上查询了一下内存泄漏的分析工具，给eclipse安装了MAT插件用于分析文件。为了生成hprof文件,在测试机器上多次调用方法，直到根据jconsole发现快到顶点了，运行以下命令:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jmap -dump:format=b,file=a.hprof  24957</span><br><span class="line">//后面的24957是进程ID可用下面命令get</span><br><span class="line">ps -ef|grep java</span><br><span class="line">然后找到项目名对应的pid即可</span><br></pre></td></tr></table></figure></p>
+<p>&#160; &#160; &#160;生成的文件直接用装了MAT插件的eclipse打开即可：<br><img src="leanote://file/getImage?fileId=58b2d2872b94f0554d000000" alt=""><br>&#160; &#160; &#160;可以看到图中很明显的第三方库的类名，就可以判断可能是在用该类的地方的资源没释放，然后对应地查找。当然MAT和jconsole还有更强大的功能等着大家去使用。<br>&#160; &#160; &#160;这里说一句题外话，在使用这几个类的地方，发现用完之后已经调用了释放方法，很是奇怪，也没头绪。后面想到跟javacv给的sample code对比一下，发现网上流传的释放方法和样例中的并不一致，改成样例中的方法之后，解决了该问题。<strong>得到的教训是如果第三方库有给示例代码，还是得多参考示例代码。</strong><br>&#160; &#160; &#160;最终再用jconsole连接机器，观察内存回收，就得到了上面那个图。还有下面这个图：<br><img src="http://7xsmif.com1.z0.glb.clouddn.com/QQ%E5%9B%BE%E7%89%8720170226203741.png"><br>&#160; &#160; &#160;这里看到使用的回收算法是新生代是parNew,老年代是CMS。顺势复习了一波垃圾回收算法，做了下面这样一个图片：<br>&#160; &#160; &#160;链接：<a href="https://www.processon.com/view/587a409de4b098bf4ca43bf7" target="_blank" rel="external">https://www.processon.com/view/587a409de4b098bf4ca43bf7</a></p>
+
+          
+        
+      
+    </div>
+    
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/02/19/TCP-IP协议卷解一各章节导图/" itemprop="url">
                   TCP/IP协议卷解一各章节导图
                 </a>
@@ -1399,146 +1513,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/26/细数JDK里的设计模式/" itemprop="url">
-                  细数JDK里的设计模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-26T23:02:04+08:00" content="2016-04-26">
-              2016-04-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/04/26/细数JDK里的设计模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/26/细数JDK里的设计模式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/04/26/细数JDK里的设计模式/" class="leancloud_visitors" data-flag-title="细数JDK里的设计模式">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>转自：<a href="http://it.deepinmind.com/设计模式/2014/03/10/细数JDK里的设计模式.html">细数JDK里的设计模式</a></p>
-<h1 id="结构型模式："><a href="#结构型模式：" class="headerlink" title="结构型模式："></a>结构型模式：</h1><h2 id="适配器模式："><a href="#适配器模式：" class="headerlink" title="适配器模式："></a>适配器模式：</h2><p>用来把一个接口转化成另一个接口.  </p>
-<ul>
-<li>java.util.Arrays#asList()</li>
-<li>javax.swing.JTable(TableModel)</li>
-<li>java.io.InputStreamReader(InputStream)</li>
-<li>java.io.OutputStreamWriter(OutputStream)</li>
-<li>javax.xml.bind.annotation.adapters.XmlAdapter#marshal()</li>
-<li>javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal()</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/04/26/细数JDK里的设计模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-    
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1584,7 +1558,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
