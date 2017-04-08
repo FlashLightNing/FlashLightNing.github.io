@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="reading,Java,JVM," />
 
 
 
@@ -82,16 +82,19 @@
 
 
 
-<meta name="description" content="I am sb">
+<meta name="description" content="&amp;#160;&amp;#160; &amp;#160;说到垃圾收集器，先说说都有哪几种垃圾收集算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一张图看懂java中的垃圾收集器">
 <meta property="og:url" content="http://FlashLightNing.github.io/2017/04/01/一张图看懂java中的垃圾收集器/index.html">
 <meta property="og:site_name" content="Boom">
-<meta property="og:description" content="I am sb">
-<meta property="og:updated_time" content="2017-04-01T15:06:52.828Z">
+<meta property="og:description" content="&amp;#160;&amp;#160; &amp;#160;说到垃圾收集器，先说说都有哪几种垃圾收集算法">
+<meta property="og:image" content="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95.png">
+<meta property="og:image" content="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8.png">
+<meta property="og:updated_time" content="2017-04-08T15:33:35.660Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一张图看懂java中的垃圾收集器">
-<meta name="twitter:description" content="I am sb">
+<meta name="twitter:description" content="&amp;#160;&amp;#160; &amp;#160;说到垃圾收集器，先说说都有哪几种垃圾收集算法">
+<meta name="twitter:image" content="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95.png">
 
 
 
@@ -276,6 +279,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/reading/" itemprop="url" rel="index">
+                    <span itemprop="name">reading</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -314,7 +336,31 @@
       
 
       
-        
+        <p>&#160;&#160; &#160;说到垃圾收集器，先说说都有哪几种垃圾收集算法<br><a id="more"></a></p>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><p><img src="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95.png"><br>（详见链接：<a href="http://processon.com/mindmap/58dfc26be4b02ac16d63c256）" target="_blank" rel="external">http://processon.com/mindmap/58dfc26be4b02ac16d63c256）</a><br>&#160;&#160; &#160;大概有这么几种收集算法：</p>
+<ol>
+<li>标记-清除算法</li>
+<li>复制算法</li>
+<li>标记-整理算法</li>
+<li>分代回收算法</li>
+</ol>
+<p>&#160;&#160; &#160;而不同的垃圾回收器则是使用了不同的垃圾回收算法，从而达到不同的目的。</p>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p><img src="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8.png"><br>(详见<a href="http://processon.com/mindmap/587a409de4b098bf4ca43bf7" target="_blank" rel="external">http://processon.com/mindmap/587a409de4b098bf4ca43bf7</a>)<br>&#160;&#160; &#160;概括起来，将垃圾收集器分为新生代垃圾收集器，老年代垃圾收集器，还有一个特殊的G1收集器<br>&#160;&#160; &#160;新生代收集器</p>
+<ol>
+<li>serial收集器</li>
+<li>ParNew收集器</li>
+<li>Paraller Scavenge收集器</li>
+</ol>
+<p>&#160;&#160; &#160;老年代收集器</p>
+<ol>
+<li>serial old收集器</li>
+<li>Paraller Old收集器</li>
+<li>CMS收集器</li>
+</ol>
+<p>&#160;&#160; &#160;新生代收集器统一采用的是复制算法，<strong>因为新生代中对象存活时间短，每次垃圾回收时都有大量对象死去，采用复制算法的成本很低</strong><br>&#160;&#160; &#160;老年代收集器中，serial old 和Paraller Old收集器采用标记-整理算法，CMS看名字就是标记-清除（Mark-Sweep）<br>&#160;&#160; &#160;现在用的收集算法，老年代普遍应该是CMS,而新生代中，能与CMS搭配的只有serial 和ParNew。ParNew可以看成是serial的多线程版本，所以收集器的话，ParNew+CMS的搭配比较常见。</p>
+<h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p> &#160;&#160; &#160;<strong>CMS中需要注意的一点是会产生concurrent mode failure的情况</strong>。这个是为什么呢？因为CMS在并发清除垃圾的时候，用户线程还是在运行的，这也就意味着用户线程还会不断的产生垃圾（也称浮动垃圾）。<strong>这些垃圾是只能等待下次回收的，因为不在此次的标记范围内</strong>。假设CMS是在内存全部用完的时候进行的，那用户线程还在运行，还需要分配空间怎么办呢？就会导致内存不够，发生concurrent mode failure.然后启用备用的收集方案–serial old.所以CMS要在内存使用到了一定的比例时，就要进行垃圾回收（一般是92%，可通过参数配置）。若比例低了，则频繁进行回收降低效率。若比例高了，发生concurrent mode failure则得不偿失。</p>
+<h3 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h3><p> &#160;&#160; &#160;G1收集器又是一种不同的思路。它将内存分成多个region，跟踪每个region里面垃圾堆积大小，然后<strong>维护一个列表，其中是回收该区域能得到的空间和回收该区域所需要的时间</strong>。这种方式保证了G1收集器能在有限的时间内尽可能得提高回收效率。<br> &#160;&#160; &#160;但是想想，虽然将内存分成了多个region,但是不同region之间可以有引用关系，其他region里面的对象可以引用别的region里面的对象，那意思就是对一个region做可达性分析的时候，还需要对整个堆遍历一次？？答案肯定不是的。每一个region都有一个remembered set,G1使用remembered set 来记录那些其他region里面的被引用对象的相关信息，若A里面的对象引用了B里面的对象，则A对应的remembered set中就记录了B里面该对象的信息，最后对A做可达性分析时，只需要遍历A的remembered set即可。</p>
+
       
     </div>
     
@@ -331,6 +377,16 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/reading/" rel="tag">#reading</a>
+          
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/JVM/" rel="tag">#JVM</a>
+          
+        </div>
       
 
       
@@ -483,7 +539,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">1.</span> <span class="nav-text">垃圾收集算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">2.</span> <span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS收集器"><span class="nav-number">2.1.</span> <span class="nav-text">CMS收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1收集器"><span class="nav-number">2.2.</span> <span class="nav-text">G1收集器</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
