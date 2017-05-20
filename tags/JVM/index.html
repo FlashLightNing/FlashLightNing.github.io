@@ -85,7 +85,7 @@
 <meta name="description" content="I am sb">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Boom">
-<meta property="og:url" content="http://FlashLightNing.github.io/tags/jvm/index.html">
+<meta property="og:url" content="http://FlashLightNing.github.io/tags/JVM/index.html">
 <meta property="og:site_name" content="Boom">
 <meta property="og:description" content="I am sb">
 <meta name="twitter:card" content="summary">
@@ -108,7 +108,7 @@
   };
 </script>
 
-  <title> 标签: jvm | Boom </title>
+  <title> 标签: JVM | Boom </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -239,7 +239,7 @@
   <div id="posts" class="posts-collapse">
     <div class="collection-title">
       <h2 >
-        jvm
+        JVM
         <small>标签</small>
       </h2>
     </div>
@@ -252,9 +252,9 @@
 
       <h1 class="post-title">
         
-            <a class="post-title-link" href="/2017/04/04/4段代码了解Java虚拟机虚方法和非虚方法的分派/" itemprop="url">
+            <a class="post-title-link" href="/2017/05/20/深入了解标记-清扫回收算法/" itemprop="url">
               
-                <span itemprop="name">4段代码了解Java虚拟机虚方法和非虚方法的分派</span>
+                <span itemprop="name">深入了解标记-清扫回收算法</span>
               
             </a>
         
@@ -262,9 +262,65 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-04T17:13:00+08:00"
-              content="2017-04-04" >
-          04-04
+              datetime="2017-05-20T10:20:52+08:00"
+              content="2017-05-20" >
+          05-20
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/04/01/一张图看懂java中的垃圾收集器/" itemprop="url">
+              
+                <span itemprop="name">一张图看懂java中的垃圾收集器</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-04-01T23:06:52+08:00"
+              content="2017-04-01" >
+          04-01
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/02/26/记一次内存泄漏排查问题/" itemprop="url">
+              
+                <span itemprop="name">记一次内存泄漏排查问题</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-02-26T21:18:14+08:00"
+              content="2017-02-26" >
+          02-26
         </time>
       </div>
 
@@ -561,51 +617,6 @@
             counter.save(null, {
               success: function(counter) {
                 var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-</body>
-</html>
-ar $element = $(document.getElementById(url));
                 $element.find('.leancloud-visitors-count').text(counter.get('time'));
               },
               error: function(counter, error) {

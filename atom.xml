@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://FlashLightNing.github.io/"/>
-  <updated>2017-05-20T02:51:18.375Z</updated>
+  <updated>2017-05-20T02:54:02.754Z</updated>
   <id>http://FlashLightNing.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://FlashLightNing.github.io/2017/05/20/%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3%E6%A0%87%E8%AE%B0-%E6%B8%85%E6%89%AB%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/"/>
     <id>http://FlashLightNing.github.io/2017/05/20/深入了解标记-清扫回收算法/</id>
     <published>2017-05-20T02:20:52.000Z</published>
-    <updated>2017-05-20T02:51:18.375Z</updated>
+    <updated>2017-05-20T02:54:02.754Z</updated>
     
     <content type="html">&lt;p&gt;摘自《the garbage collection handbook》&lt;/p&gt;
 &lt;h2 id=&quot;1-回收过程分为2个阶段&quot;&gt;&lt;a href=&quot;#1-回收过程分为2个阶段&quot; class=&quot;headerlink&quot; title=&quot;1.回收过程分为2个阶段:&quot;&gt;&lt;/a&gt;1.回收过程分为2个阶段:&lt;/h2&gt;&lt;ol&gt;
