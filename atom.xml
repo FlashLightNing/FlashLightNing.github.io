@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://FlashLightNing.github.io/"/>
-  <updated>2017-04-04T10:18:21.801Z</updated>
+  <updated>2017-05-20T02:39:13.854Z</updated>
   <id>http://FlashLightNing.github.io/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>&#39;深入了解标记-清扫回收算法&#39;</title>
+    <link href="http://FlashLightNing.github.io/2017/05/20/%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3%E6%A0%87%E8%AE%B0-%E6%B8%85%E6%89%AB%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/"/>
+    <id>http://FlashLightNing.github.io/2017/05/20/深入了解标记-清扫回收算法/</id>
+    <published>2017-05-20T02:20:52.000Z</published>
+    <updated>2017-05-20T02:39:13.854Z</updated>
+    
+    <content type="html">&lt;p&gt;##1.回收过程分为2个阶段：##&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;追踪阶段：回收器从根集合（寄存器，线程栈，全局变量）开始遍历对象图并按照一定规则进行标记&lt;/li&gt;
+&lt;li&gt;清扫阶段：回收器检查堆中每一个对象，然后将所有未标记的对象当做垃圾进行回收&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&amp;#160;&amp;#160; &amp;#160;标记清扫属于&lt;strong&gt;间接回收&lt;/strong&gt;，它并非直接检测垃圾本身，而是先 确定存活对象，再反过来判断其他对象都是垃圾。&lt;strong&gt;每次调用该回收算法都需要重新计算存活对象集合。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&amp;#160;&amp;#160; &amp;#160;回收器和赋值器之间的调用关系：如果线程无法再分配对象了，则唤起回收器，回收完后再次尝试分配，若分配失败，则抛出OOM异常。&lt;/p&gt;
+&lt;p&gt;&amp;#160;&amp;#160; &amp;#160;回收器如何标记垃圾：回收器可以通过在对象头部某个位或者字节的方式对其进行标记，也可以标记在另外的一张表中。&lt;br&gt;&amp;#160;&amp;#160; &amp;#160;标记阶段：工作列表为空的时候表示标记完成，此时表示回收器已经对每个可达对象完成的访问和标记，没有打上标记的则表明是垃圾。&lt;br&gt;&amp;#160;&amp;#160; &amp;#160;清扫阶段：回收器会在堆中进行线性扫描，即从堆底开始释放未标记的对象，然后将这些对象返还给分配器，用于后面的内存分配需求。同时还会清空存活对象的标记用于下次回收时使用。&lt;/p&gt;
+&lt;h3 id=&quot;标记-清扫回收器要求堆布局满足一定的条件：&quot;&gt;&lt;a href=&quot;#标记-清扫回收器要求堆布局满足一定的条件：&quot; class=&quot;headerlink&quot; title=&quot;标记-清扫回收器要求堆布局满足一定的条件：&quot;&gt;&lt;/a&gt;标记-清扫回收器要求堆布局满足一定的条件：&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;该回收器不会移动对象，因此内存管理必须能控制堆内存碎片。因为过多的内存碎片会导致分配器无法满足新的分配请求，导致回收频率提高。&lt;/li&gt;
+&lt;li&gt;清扫器必须能够遍历堆中的每一个对象。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&amp;#160;&amp;#160; &amp;#160;时间局部性：一旦程序访问了某个地址空间，则很可能在不久之后再次访问该地址，所以值得将该值缓存&lt;br&gt;&amp;#160;&amp;#160; &amp;#160;空间局部性：一旦程序访问了某个地址空间，则很可能在不久之后访问到该地址附近的地址空间。&lt;/p&gt;
+&lt;h2 id=&quot;160-160-160-2-如何改进标记–清楚算法：&quot;&gt;&lt;a href=&quot;#160-160-160-2-如何改进标记–清楚算法：&quot; class=&quot;headerlink&quot; title=&quot;&amp;#160;&amp;#160; &amp;#160;2.如何改进标记–清楚算法：&quot;&gt;&lt;/a&gt;&amp;#160;&amp;#160; &amp;#160;2.如何改进标记–清楚算法：&lt;/h2&gt;&lt;h3 id=&quot;160-160-160-1-位图标记&quot;&gt;&lt;a href=&quot;#160-160-160-1-位图标记&quot; class=&quot;headerlink&quot; title=&quot;&amp;#160;&amp;#160; &amp;#160;1.位图标记&quot;&gt;&lt;/a&gt;&amp;#160;&amp;#160; &amp;#160;1.位图标记&lt;/h3&gt;&lt;p&gt;&amp;#160;&amp;#160; &amp;#160;位图标记：前面提到回收器可以通过在对象头部某个位或者字节的方式对垃圾进行标记，也可以用一个独立的位图来进行标记：位图中的每个位对应着每个可能分配对象的地址。位图可以只有一个，也可以有多个，比如每个内存块维护各自的位图。&lt;br&gt;&amp;#160;&amp;#160; &amp;#160;位图标记通常仅适用于单线程环境，因为多线程同时修改位图存在较大的写冲突。相对于位图，实践中更常用的是字节图（byte-map）,虽然占用的空间是前者的8倍，却可以解决写冲突问题。在实际中，如果将标记位保存在对象头部，会引起额外的复杂性。因为对象头一般存放赋值器共享的数据，如锁和哈希值。当标记线程和赋值器线程并发执行时可能会产生冲突。所以为了确保安全，一般标记位会占用对象头部额外的一个字，以便与赋值器共享的数据进行区分。&lt;/p&gt;
+&lt;h3 id=&quot;160-160-160-位图标记的优点：&quot;&gt;&lt;a href=&quot;#160-160-160-位图标记的优点：&quot; class=&quot;headerlink&quot; title=&quot;&amp;#160;&amp;#160; &amp;#160;位图标记的优点：&quot;&gt;&lt;/a&gt;&amp;#160;&amp;#160; &amp;#160;位图标记的优点：&lt;/h3&gt;&lt;p&gt;&amp;#160;&amp;#160; &amp;#160; 1. 标记位更加密集&lt;br&gt;&amp;#160;&amp;#160; &amp;#160; 2. 标记过程只需要读取存活对象的指针域而不会修改任何对象&lt;br&gt; &amp;#160;&amp;#160; &amp;#160;3. 清扫器不会对存活对象进行任何读写操作，它只会在释放垃圾对象的过程中覆盖其某些域，例如将它连接到空闲链表上&lt;br&gt;所以位图标记不仅可以减少内存中需要修改的字节数，而且减少了对高速缓存行的写入，进而减少需要写回内存的数据量&lt;br&gt; &amp;#160;&amp;#160; &amp;#160;4.减少回收过程的内存换页次数。许多证据表明，对象往往成簇出现，成簇死亡，而许多分配器往往也会将这些对象分配在相邻空间。好处：1.在位图/字节图中，每个位或者每个字节全部都被设置/清空标记位的情况经常出现，因此回收器可以批量读取/清空一批对象的标记位；2.通过位图可以更简单的判定某一个内存块中的所有对象是否都是垃圾，进而可能一次性回收整个内存块。&lt;br&gt;&amp;#160;&amp;#160; &amp;#160;混合标记策略：将每一个数据块与字节图中的一个字相关联，同时依然保留对象头部的标记位。&lt;strong&gt;当且仅当内存块中至少存在一个存活对象时，该内存块所对应的标记字节才会被设置&lt;/strong&gt;。所以清扫器可以根据字节图快速的判断某一个内存块是否完全为空，进而整体回收。&lt;/p&gt;
+&lt;h3 id=&quot;160-160-160-2-懒惰清扫&quot;&gt;&lt;a href=&quot;#160-160-160-2-懒惰清扫&quot; class=&quot;headerlink&quot; title=&quot;&amp;#160;&amp;#160; &amp;#160;2.懒惰清扫&quot;&gt;&lt;/a&gt;&amp;#160;&amp;#160; &amp;#160;2.懒惰清扫&lt;/h3&gt;&lt;p&gt;&amp;#160;&amp;#160; &amp;#160;懒惰清扫：标记过程的时间复杂度：O(L),L是堆中存活对象的数量。清扫过程中的时间复杂度是O(H),H是堆空间大小。H&amp;gt;L,所以我们会误认为清扫阶段的开销是整个标记-清扫开销的主要部分。但实际上，标记追踪阶段内存的访问模式是不可预测的，而清扫过程的可预测性则高的多，同时清扫一个对象的开销也比    追踪的开销小得多。如何降低甚至消除清扫阶段的停顿时间。基于2个特征：1.一个对象一旦成为垃圾，它将一直是垃圾，不可能再次被赋值器访问；2.赋值器不会访问对象的标记位。在回收过程中，回收器在将堆中所有存活对象标记完成之后，只是简单的将完全为空的内存块返还给分配器，同时将其他内存块添加到其所对应空间大小分级的回收队列中。对于任何内存分配的请求，分配器首先从合适的空间大小分级中分配一个空闲槽，如果调用失败则调用清扫器执行懒惰清扫，即从该空间大小分级的回收队列中取出一个或者多个内存块进行清扫，直到满足分配要求。&lt;br&gt;也可能会出现没有内存块可供清扫或者是被清扫的内存块不包含任何空闲槽的情况。此时分配器就要尝试从更低级别的块分配器中获取新内存。但若无法获取新内存块，则必须执行垃圾回收&lt;/p&gt;
+&lt;h2 id=&quot;160-160-160-标记-清扫回收器需要考虑的问题：&quot;&gt;&lt;a href=&quot;#160-160-160-标记-清扫回收器需要考虑的问题：&quot; class=&quot;headerlink&quot; title=&quot;&amp;#160;&amp;#160; &amp;#160;标记-清扫回收器需要考虑的问题：&quot;&gt;&lt;/a&gt;&amp;#160;&amp;#160; &amp;#160;标记-清扫回收器需要考虑的问题：&lt;/h2&gt;&lt;p&gt;&amp;#160;&amp;#160; &amp;#160;1.赋值器的开销：最简单的标记-清扫回收器不会给赋值器带来任何额外的读写开销，相比之下，引用计数器会带来显著的开销。分代回收器，并发回收器，增量回收器都要求赋值器在修改指针时通知回收器，但对于程序的整体执行时间而言，这部分的开销通常较小。&lt;br&gt;&amp;#160;&amp;#160; &amp;#160;2.使用懒惰清扫策略的回收器通常有较高的吞吐量，主要开销在于追踪阶段。对于已发现的垃圾对象，只需要设置一个标记位。相比之下，复制算法和标记-整理算法则还需要移动对象。&lt;br&gt;&amp;#160;&amp;#160; &amp;#160;3.空间利用率：如果将标记位放在对象头部，则不会产生额外的开销。如果使用位图，则额外空间取决于对象的字节要求，如要求32字节对齐，则总开销不会超过堆内存的1/32或1/64(一个32字节的对象用一个字节来标记，所以总占用空间是所有对象大小的1/32，也就是堆内存的1/32)。而复制式算法的利用率则较低。但非整理式回收器（如标记-清理）通常都会存在内存碎片，这对空间利用率也会造成一定的影响。&lt;br&gt;和其他追踪式回收算法一样，标记-清扫算法需要在回收所有死亡对象空间之前先确定所有的存活对象。这意味着追踪式回收器需要保留一定的空间来执行这项操作。若堆中存活对象较多，且分配速率较快，则会引起频繁的垃圾回收操作。对于中大型的堆，需要保留20%~50%的空间。&lt;br&gt;&amp;#160;&amp;#160; &amp;#160;4.移动还是不移动。非移动算法的优点在于，不移动对象的特征使得标记-清扫算法可以用于 那些编译器和回收器不合作的场景。回收器无法获取到赋值器根集合和对象域的详细信息，所以不能随便移动对象。同时，出于安全考虑，在不合作的系统中保守式的回收器不能修改用户数据，包括对象头，所以用位图进行标记要比在对象头进行标记更好。但非移动算法的主要问题在于随着回收进行会产生内存碎片，所以会比整理式算法的回收频率更高。也需要保留20%~50%的空间，避免性能颠簸。因为会产生内存碎片，所以许多标记-清扫算法还会定期使用标记-整理算法进行内存整理。&lt;/p&gt;
+&lt;p&gt;##总结：##&lt;br&gt;总结起来，标记-清扫分为标记和清扫2个过程，回收过程不会移动对象，因此容易产生内存碎片。针对2个过程，分别有优化的方法。标记过程的优化可以采用位图（字节图）进行标记的方法。清扫过程的优化可以采用懒惰清扫的策略。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;##1.回收过程分为2个阶段：##&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;追踪阶段：回收器从根集合（寄存器，线程栈，全局变量）开始遍历对象图并按照一定规则进行标记&lt;/li&gt;
+&lt;li&gt;清扫阶段：回收器检查堆中每一个对象，然后将所有未标记的对象当做垃圾进行回收&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+    
+    </summary>
+    
+      <category term="JVM" scheme="http://FlashLightNing.github.io/categories/JVM/"/>
+    
+      <category term="reading" scheme="http://FlashLightNing.github.io/categories/JVM/reading/"/>
+    
+    
+      <category term="reading" scheme="http://FlashLightNing.github.io/tags/reading/"/>
+    
+      <category term="JVM" scheme="http://FlashLightNing.github.io/tags/JVM/"/>
+    
+  </entry>
   
   <entry>
     <title>4段代码了解Java虚拟机虚方法和非虚方法的分派</title>
@@ -696,9 +745,9 @@
       <category term="设计模式" scheme="http://FlashLightNing.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="java" scheme="http://FlashLightNing.github.io/tags/java/"/>
-    
       <category term="design-patterns" scheme="http://FlashLightNing.github.io/tags/design-patterns/"/>
+    
+      <category term="java" scheme="http://FlashLightNing.github.io/tags/java/"/>
     
   </entry>
   
@@ -888,67 +937,6 @@ ImageCodec.createImageEncoder(&amp;quot;JPEG&amp;quot;, os2, param2);
     <summary type="html">
     
       &lt;p&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;前面说到怎样区分不同类型的图片，参考了这篇博客 :&lt;a href=&quot;http://blog.csdn.net/fenglibing/article/details/7733496&quot;&gt;表示不同文件类型的魔术数字&lt;/a&gt;&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;&lt;strong&gt;这里所说的表示不同文件类型的魔术数字，指定是文件的最开头的几个用于唯一区别其它文件类型的字节，有了这些魔术数字，我们就可以很方便的区别不同的文件，这也使得编程变得更加容易&lt;/strong&gt;&lt;br&gt;&amp;#160; &amp;#160; &amp;#160; &amp;#160;比如，一个JPEG文件，它开头的一些字节可能是类似这样的”ffd8 ffe0 0010 4a46 4946 0001 0101 0047 ……JFIF…..G“，这里”ffd8“就表示了这个文件是一个JPEG类型的文件，”ffe0“表示这是JFIF类型结构。&lt;br&gt;所以我们只需要判断图片开头的几个字节就可以得到它的类型，只要它的开头不等于ffd8，那么它就不是JPEG类型的图片&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://FlashLightNing.github.io/tags/java/"/>
-    
-      <category term="图像加密" scheme="http://FlashLightNing.github.io/tags/%E5%9B%BE%E5%83%8F%E5%8A%A0%E5%AF%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>混沌序列图像加密传输总结（1）</title>
-    <link href="http://FlashLightNing.github.io/2016/04/07/%E6%B7%B7%E6%B2%8C%E5%BA%8F%E5%88%97%E5%9B%BE%E5%83%8F%E5%8A%A0%E5%AF%86%E4%BC%A0%E8%BE%93/"/>
-    <id>http://FlashLightNing.github.io/2016/04/07/混沌序列图像加密传输/</id>
-    <published>2016-04-07T14:02:40.000Z</published>
-    <updated>2016-04-07T15:49:07.158Z</updated>
-    
-    <content type="html">&lt;p&gt;&lt;strong&gt;离散时间混沌序列图像加密解密大致有以下几个步骤:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://baike.baidu.com/link?url=DJKZliiFPW-M_9jVWjt99glbS0RryObOFWuA6Nt2ZN-SfzdE3VNYO5jqgShK5ob0EJ9GGqlG0ncFhmWzaqGpu_&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;猫脸映射(也叫Arnold变换)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;混沌加密&lt;/li&gt;
-&lt;li&gt;混沌解密&lt;/li&gt;
-&lt;li&gt;猫脸逆映射&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;踩了以下几个坑：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;如何读取图片将其转为像素数组&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;如何将处理好的像素数组转为图片&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ImageIO.read(File file) =null的情况，但是图片文件却又是真实存在&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;循环迭代猫脸映射的时候，用数组1=数组2的方式，使得两个数组的引用是一样的，而导致修改数组1引起数组2的改变，然后发现映射出错。&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;h2 id=&quot;处理思路&quot;&gt;&lt;a href=&quot;#处理思路&quot; class=&quot;headerlink&quot; title=&quot;处理思路&quot;&gt;&lt;/a&gt;处理思路&lt;/h2&gt;&lt;p&gt; &amp;#160; &amp;#160; &amp;#160; &amp;#160;&lt;strong&gt;主要涉及了Java的图像处理方面的API，如读取图像，读取图像像素数组：&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;       BufferedImage image = ImageIO.read(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; File(imgPath));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			N = image.getWidth();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			array = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;double&lt;/span&gt;[N][N];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			rgbArray = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;[N * N + &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//从(0,0)开始，宽度为N,高度N（猫脸映射要求长宽一致）,offset=0&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			rgbArray = image.getRGB(&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, N, N, rgbArray, &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;, N);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; i = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; i &amp;lt; N; i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				&lt;span class=&quot;keyword&quot;&gt;for&lt;/span&gt; (&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt; j = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;; j &amp;lt; N; j++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;					Color color = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Color(rgbArray[j * N + i]);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;					array[i][j] = color.getRed() / &lt;span class=&quot;number&quot;&gt;255.0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;strong&gt;将像素数组转为一张图片：&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt; public static void changeArrayToImage(double[][] array, String path,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			String process) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			//数组长度，即图片大小&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		int N = array.length;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		System.out.println(process + &amp;quot;:&amp;quot; + N);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		//TYPE_BYTE_GRAY表示是灰度图片&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		BufferedImage image = new BufferedImage(N, N,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				BufferedImage.TYPE_BYTE_GRAY);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		for (int i = 0; i &amp;lt; N; i++)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			for (int j = 0; j &amp;lt; N; j++) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			/*本来是从0-1的double型数组，将他变成0-255范围的像  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  素值，选择让R=G=B=灰度值，根据这个生成了一个color对象，然后得到  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;这个对象的RGB值（在Java里面是一个整数，不同的位数表示不同的值）  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;，然后绘制在(X,Y)点。这样就完成了从像素数组到图片的过程*/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				int gray = (int) (array[i][j] * 255);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				int rgb = new Color(gray, gray, gray).getRGB();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;				image.setRGB(i, j, rgb);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		try &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			ImageIO.write(image, &amp;quot;jpg&amp;quot;, new File(path));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125; catch (IOException e) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;			e.printStackTrace();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		System.out.println(process + &amp;quot;:数组转换图片成功,路径:&amp;quot; + path);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这两个方法在算法中用到比较多，因为我把每个步骤处理之后得到的数组都画成图片，这样可以直观的看到效果：&lt;br&gt;原图:&lt;br&gt;&lt;img src=&quot;http://7xsmif.com2.z0.glb.clouddn.com/image/java/lena.jpg&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;&lt;/p&gt;
-&lt;p&gt;猫脸映射之后得到的图像&lt;img src=&quot;http://7xsmif.com2.z0.glb.clouddn.com/image/java/after_arnoldChange_image_path.jpg&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;&lt;br&gt;这只是迭代了5次之后得到的效果，&lt;strong&gt;猫脸映射存在一定的周期，所以也不是迭代次数越大越好&lt;/strong&gt;&lt;br&gt;前面读取图像还有一个坑，就是&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;BufferedImage image = ImageIO.read(new File(imgPath));&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;它只能读取常用的一些图片格式，如&lt;/p&gt;
-&lt;p&gt;-&lt;strong&gt;BMP, bmp, jpg, JPG, wbmp,&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;jpeg, png, PNG, JPEG, &lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;WBMP, GIF, gif.&lt;/strong&gt;&lt;br&gt;而&lt;a href=&quot;http://baike.baidu.com/link?url=S4G2koOmL-zYfIaWKdn8OUy5fpQwPUcz7BanJdxcB6msMMT6Lk5q-kbDLPsO-qe-2gOR5fXhv6Imy3rR2MoBEWjKwObY1TLedhUcmCo-_vG&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;tiff&lt;/a&gt;格式的图片不能读取，因此会报&lt;strong&gt;ImageIO.read(new File(imgPath))=null&lt;/strong&gt;的错误。而且有些后缀名是jpg的图片也不能，是因为它只是改了文件后缀而已，实际上还是tiff格式的图片。&lt;h3 id=&quot;那么该怎么区分它们？怎么将tiff格式图片转为其他类型图片呢？&quot;&gt;&lt;a href=&quot;#那么该怎么区分它们？怎么将tiff格式图片转为其他类型图片呢？&quot; class=&quot;headerlink&quot; title=&quot;那么该怎么区分它们？怎么将tiff格式图片转为其他类型图片呢？&quot;&gt;&lt;/a&gt;那么该怎么区分它们？怎么将tiff格式图片转为其他类型图片呢？&lt;/h3&gt;在下一篇博客里面贴出区分方法及代码&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;离散时间混沌序列图像加密解密大致有以下几个步骤:&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://baike.baidu.com/link?url=DJKZliiFPW-M_9jVWjt99glbS0RryObOFWuA6Nt2ZN-SfzdE3VNYO5jqgShK5ob0EJ9GGqlG0ncFhmWzaqGpu_&quot;&gt;猫脸映射(也叫Arnold变换)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;混沌加密&lt;/li&gt;
-&lt;li&gt;混沌解密&lt;/li&gt;
-&lt;li&gt;猫脸逆映射&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;踩了以下几个坑：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;如何读取图片将其转为像素数组&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;如何将处理好的像素数组转为图片&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ImageIO.read(File file) =null的情况，但是图片文件却又是真实存在&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;循环迭代猫脸映射的时候，用数组1=数组2的方式，使得两个数组的引用是一样的，而导致修改数组1引起数组2的改变，然后发现映射出错。&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
     
     </summary>
     

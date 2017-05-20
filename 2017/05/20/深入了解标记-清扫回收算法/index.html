@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="reading,Java,JVM," />
+  <meta name="keywords" content="reading,JVM," />
 
 
 
@@ -82,19 +82,34 @@
 
 
 
-<meta name="description" content="&amp;#160;&amp;#160; &amp;#160;说到垃圾收集器，先说说都有哪几种垃圾收集算法">
+<meta name="description" content="##1.回收过程分为2个阶段：##
+
+追踪阶段：回收器从根集合（寄存器，线程栈，全局变量）开始遍历对象图并按照一定规则进行标记
+清扫阶段：回收器检查堆中每一个对象，然后将所有未标记的对象当做垃圾进行回收
+
+&amp;#160;&amp;#160; &amp;#160;标记清扫属于间接回收，它并非直接检测垃圾本身，而是先 确定存活对象，再反过来判断其他对象都是垃圾。每次调用该回收算法都需要重新计算存活对象集合。
+&amp;#160">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一张图看懂java中的垃圾收集器">
-<meta property="og:url" content="http://FlashLightNing.github.io/2017/04/01/一张图看懂java中的垃圾收集器/index.html">
+<meta property="og:title" content="'深入了解标记-清扫回收算法'">
+<meta property="og:url" content="http://FlashLightNing.github.io/2017/05/20/深入了解标记-清扫回收算法/index.html">
 <meta property="og:site_name" content="Boom">
-<meta property="og:description" content="&amp;#160;&amp;#160; &amp;#160;说到垃圾收集器，先说说都有哪几种垃圾收集算法">
-<meta property="og:image" content="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95.png">
-<meta property="og:image" content="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8.png">
-<meta property="og:updated_time" content="2017-04-08T15:33:35.660Z">
+<meta property="og:description" content="##1.回收过程分为2个阶段：##
+
+追踪阶段：回收器从根集合（寄存器，线程栈，全局变量）开始遍历对象图并按照一定规则进行标记
+清扫阶段：回收器检查堆中每一个对象，然后将所有未标记的对象当做垃圾进行回收
+
+&amp;#160;&amp;#160; &amp;#160;标记清扫属于间接回收，它并非直接检测垃圾本身，而是先 确定存活对象，再反过来判断其他对象都是垃圾。每次调用该回收算法都需要重新计算存活对象集合。
+&amp;#160">
+<meta property="og:updated_time" content="2017-05-20T02:39:13.854Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一张图看懂java中的垃圾收集器">
-<meta name="twitter:description" content="&amp;#160;&amp;#160; &amp;#160;说到垃圾收集器，先说说都有哪几种垃圾收集算法">
-<meta name="twitter:image" content="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95.png">
+<meta name="twitter:title" content="'深入了解标记-清扫回收算法'">
+<meta name="twitter:description" content="##1.回收过程分为2个阶段：##
+
+追踪阶段：回收器从根集合（寄存器，线程栈，全局变量）开始遍历对象图并按照一定规则进行标记
+清扫阶段：回收器检查堆中每一个对象，然后将所有未标记的对象当做垃圾进行回收
+
+&amp;#160;&amp;#160; &amp;#160;标记清扫属于间接回收，它并非直接检测垃圾本身，而是先 确定存活对象，再反过来判断其他对象都是垃圾。每次调用该回收算法都需要重新计算存活对象集合。
+&amp;#160">
 
 
 
@@ -112,7 +127,7 @@
   };
 </script>
 
-  <title> 一张图看懂java中的垃圾收集器 | Boom </title>
+  <title> '深入了解标记-清扫回收算法' | Boom </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +276,7 @@
             
             
               
-                一张图看懂java中的垃圾收集器
+                '深入了解标记-清扫回收算法'
               
             
           </h1>
@@ -273,8 +288,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-01T23:06:52+08:00" content="2017-04-01">
-              2017-04-01
+            <time itemprop="dateCreated" datetime="2017-05-20T10:20:52+08:00" content="2017-05-20">
+              2017-05-20
             </time>
           </span>
 
@@ -287,7 +302,19 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/reading/" itemprop="url" rel="index">
+                  <a href="/categories/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JVM/reading/" itemprop="url" rel="index">
                     <span itemprop="name">reading</span>
                   </a>
                 </span>
@@ -303,8 +330,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/04/01/一张图看懂java中的垃圾收集器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/01/一张图看懂java中的垃圾收集器/" itemprop="commentsCount"></span>
+                <a href="/2017/05/20/深入了解标记-清扫回收算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/20/深入了解标记-清扫回收算法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -314,7 +341,7 @@
 
           
           
-             <span id="/2017/04/01/一张图看懂java中的垃圾收集器/" class="leancloud_visitors" data-flag-title="一张图看懂java中的垃圾收集器">
+             <span id="/2017/05/20/深入了解标记-清扫回收算法/" class="leancloud_visitors" data-flag-title="'深入了解标记-清扫回收算法'">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -336,30 +363,24 @@
       
 
       
-        <p>&#160;&#160; &#160;说到垃圾收集器，先说说都有哪几种垃圾收集算法<br><a id="more"></a></p>
-<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><p><img src="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95.png"><br>（详见链接：<a href="http://processon.com/mindmap/58dfc26be4b02ac16d63c256）" target="_blank" rel="external">http://processon.com/mindmap/58dfc26be4b02ac16d63c256）</a><br>&#160;&#160; &#160;大概有这么几种收集算法：</p>
+        <p>##1.回收过程分为2个阶段：##</p>
 <ol>
-<li>标记-清除算法</li>
-<li>复制算法</li>
-<li>标记-整理算法</li>
-<li>分代回收算法</li>
+<li>追踪阶段：回收器从根集合（寄存器，线程栈，全局变量）开始遍历对象图并按照一定规则进行标记</li>
+<li>清扫阶段：回收器检查堆中每一个对象，然后将所有未标记的对象当做垃圾进行回收</li>
 </ol>
-<p>&#160;&#160; &#160;而不同的垃圾回收器则是使用了不同的垃圾回收算法，从而达到不同的目的。</p>
-<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><p><img src="http://7xsmif.com1.z0.glb.clouddn.com/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8.png"><br>(详见<a href="http://processon.com/mindmap/587a409de4b098bf4ca43bf7" target="_blank" rel="external">http://processon.com/mindmap/587a409de4b098bf4ca43bf7</a>)<br>&#160;&#160; &#160;概括起来，将垃圾收集器分为新生代垃圾收集器，老年代垃圾收集器，还有一个特殊的G1收集器<br>&#160;&#160; &#160;新生代收集器</p>
-<ol>
-<li>serial收集器</li>
-<li>ParNew收集器</li>
-<li>Paraller Scavenge收集器</li>
+<p>&#160;&#160; &#160;标记清扫属于<strong>间接回收</strong>，它并非直接检测垃圾本身，而是先 确定存活对象，再反过来判断其他对象都是垃圾。<strong>每次调用该回收算法都需要重新计算存活对象集合。</strong></p>
+<p>&#160;&#160; &#160;回收器和赋值器之间的调用关系：如果线程无法再分配对象了，则唤起回收器，回收完后再次尝试分配，若分配失败，则抛出OOM异常。</p>
+<p>&#160;&#160; &#160;回收器如何标记垃圾：回收器可以通过在对象头部某个位或者字节的方式对其进行标记，也可以标记在另外的一张表中。<br>&#160;&#160; &#160;标记阶段：工作列表为空的时候表示标记完成，此时表示回收器已经对每个可达对象完成的访问和标记，没有打上标记的则表明是垃圾。<br>&#160;&#160; &#160;清扫阶段：回收器会在堆中进行线性扫描，即从堆底开始释放未标记的对象，然后将这些对象返还给分配器，用于后面的内存分配需求。同时还会清空存活对象的标记用于下次回收时使用。</p>
+<h3 id="标记-清扫回收器要求堆布局满足一定的条件："><a href="#标记-清扫回收器要求堆布局满足一定的条件：" class="headerlink" title="标记-清扫回收器要求堆布局满足一定的条件："></a>标记-清扫回收器要求堆布局满足一定的条件：</h3><ol>
+<li>该回收器不会移动对象，因此内存管理必须能控制堆内存碎片。因为过多的内存碎片会导致分配器无法满足新的分配请求，导致回收频率提高。</li>
+<li>清扫器必须能够遍历堆中的每一个对象。</li>
 </ol>
-<p>&#160;&#160; &#160;老年代收集器</p>
-<ol>
-<li>serial old收集器</li>
-<li>Paraller Old收集器</li>
-<li>CMS收集器</li>
-</ol>
-<p>&#160;&#160; &#160;新生代收集器统一采用的是复制算法，<strong>因为新生代中对象存活时间短，每次垃圾回收时都有大量对象死去，采用复制算法的成本很低</strong><br>&#160;&#160; &#160;老年代收集器中，serial old 和Paraller Old收集器采用标记-整理算法，CMS看名字就是标记-清除（Mark-Sweep）<br>&#160;&#160; &#160;现在用的收集算法，老年代普遍应该是CMS,而新生代中，能与CMS搭配的只有serial 和ParNew。ParNew可以看成是serial的多线程版本，所以收集器的话，ParNew+CMS的搭配比较常见。</p>
-<h3 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h3><p> &#160;&#160; &#160;<strong>CMS中需要注意的一点是会产生concurrent mode failure的情况</strong>。这个是为什么呢？因为CMS在并发清除垃圾的时候，用户线程还是在运行的，这也就意味着用户线程还会不断的产生垃圾（也称浮动垃圾）。<strong>这些垃圾是只能等待下次回收的，因为不在此次的标记范围内</strong>。假设CMS是在内存全部用完的时候进行的，那用户线程还在运行，还需要分配空间怎么办呢？就会导致内存不够，发生concurrent mode failure.然后启用备用的收集方案–serial old.所以CMS要在内存使用到了一定的比例时，就要进行垃圾回收（一般是92%，可通过参数配置）。若比例低了，则频繁进行回收降低效率。若比例高了，发生concurrent mode failure则得不偿失。</p>
-<h3 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h3><p> &#160;&#160; &#160;G1收集器又是一种不同的思路。它将内存分成多个region，跟踪每个region里面垃圾堆积大小，然后<strong>维护一个列表，其中是回收该区域能得到的空间和回收该区域所需要的时间</strong>。这种方式保证了G1收集器能在有限的时间内尽可能得提高回收效率。<br> &#160;&#160; &#160;但是想想，虽然将内存分成了多个region,但是不同region之间可以有引用关系，其他region里面的对象可以引用别的region里面的对象，那意思就是对一个region做可达性分析的时候，还需要对整个堆遍历一次？？答案肯定不是的。每一个region都有一个remembered set,G1使用remembered set 来记录那些其他region里面的被引用对象的相关信息，若A里面的对象引用了B里面的对象，则A对应的remembered set中就记录了B里面该对象的信息，最后对A做可达性分析时，只需要遍历A的remembered set即可。</p>
+<p>&#160;&#160; &#160;时间局部性：一旦程序访问了某个地址空间，则很可能在不久之后再次访问该地址，所以值得将该值缓存<br>&#160;&#160; &#160;空间局部性：一旦程序访问了某个地址空间，则很可能在不久之后访问到该地址附近的地址空间。</p>
+<h2 id="160-160-160-2-如何改进标记–清楚算法："><a href="#160-160-160-2-如何改进标记–清楚算法：" class="headerlink" title="&#160;&#160; &#160;2.如何改进标记–清楚算法："></a>&#160;&#160; &#160;2.如何改进标记–清楚算法：</h2><h3 id="160-160-160-1-位图标记"><a href="#160-160-160-1-位图标记" class="headerlink" title="&#160;&#160; &#160;1.位图标记"></a>&#160;&#160; &#160;1.位图标记</h3><p>&#160;&#160; &#160;位图标记：前面提到回收器可以通过在对象头部某个位或者字节的方式对垃圾进行标记，也可以用一个独立的位图来进行标记：位图中的每个位对应着每个可能分配对象的地址。位图可以只有一个，也可以有多个，比如每个内存块维护各自的位图。<br>&#160;&#160; &#160;位图标记通常仅适用于单线程环境，因为多线程同时修改位图存在较大的写冲突。相对于位图，实践中更常用的是字节图（byte-map）,虽然占用的空间是前者的8倍，却可以解决写冲突问题。在实际中，如果将标记位保存在对象头部，会引起额外的复杂性。因为对象头一般存放赋值器共享的数据，如锁和哈希值。当标记线程和赋值器线程并发执行时可能会产生冲突。所以为了确保安全，一般标记位会占用对象头部额外的一个字，以便与赋值器共享的数据进行区分。</p>
+<h3 id="160-160-160-位图标记的优点："><a href="#160-160-160-位图标记的优点：" class="headerlink" title="&#160;&#160; &#160;位图标记的优点："></a>&#160;&#160; &#160;位图标记的优点：</h3><p>&#160;&#160; &#160; 1. 标记位更加密集<br>&#160;&#160; &#160; 2. 标记过程只需要读取存活对象的指针域而不会修改任何对象<br> &#160;&#160; &#160;3. 清扫器不会对存活对象进行任何读写操作，它只会在释放垃圾对象的过程中覆盖其某些域，例如将它连接到空闲链表上<br>所以位图标记不仅可以减少内存中需要修改的字节数，而且减少了对高速缓存行的写入，进而减少需要写回内存的数据量<br> &#160;&#160; &#160;4.减少回收过程的内存换页次数。许多证据表明，对象往往成簇出现，成簇死亡，而许多分配器往往也会将这些对象分配在相邻空间。好处：1.在位图/字节图中，每个位或者每个字节全部都被设置/清空标记位的情况经常出现，因此回收器可以批量读取/清空一批对象的标记位；2.通过位图可以更简单的判定某一个内存块中的所有对象是否都是垃圾，进而可能一次性回收整个内存块。<br>&#160;&#160; &#160;混合标记策略：将每一个数据块与字节图中的一个字相关联，同时依然保留对象头部的标记位。<strong>当且仅当内存块中至少存在一个存活对象时，该内存块所对应的标记字节才会被设置</strong>。所以清扫器可以根据字节图快速的判断某一个内存块是否完全为空，进而整体回收。</p>
+<h3 id="160-160-160-2-懒惰清扫"><a href="#160-160-160-2-懒惰清扫" class="headerlink" title="&#160;&#160; &#160;2.懒惰清扫"></a>&#160;&#160; &#160;2.懒惰清扫</h3><p>&#160;&#160; &#160;懒惰清扫：标记过程的时间复杂度：O(L),L是堆中存活对象的数量。清扫过程中的时间复杂度是O(H),H是堆空间大小。H&gt;L,所以我们会误认为清扫阶段的开销是整个标记-清扫开销的主要部分。但实际上，标记追踪阶段内存的访问模式是不可预测的，而清扫过程的可预测性则高的多，同时清扫一个对象的开销也比    追踪的开销小得多。如何降低甚至消除清扫阶段的停顿时间。基于2个特征：1.一个对象一旦成为垃圾，它将一直是垃圾，不可能再次被赋值器访问；2.赋值器不会访问对象的标记位。在回收过程中，回收器在将堆中所有存活对象标记完成之后，只是简单的将完全为空的内存块返还给分配器，同时将其他内存块添加到其所对应空间大小分级的回收队列中。对于任何内存分配的请求，分配器首先从合适的空间大小分级中分配一个空闲槽，如果调用失败则调用清扫器执行懒惰清扫，即从该空间大小分级的回收队列中取出一个或者多个内存块进行清扫，直到满足分配要求。<br>也可能会出现没有内存块可供清扫或者是被清扫的内存块不包含任何空闲槽的情况。此时分配器就要尝试从更低级别的块分配器中获取新内存。但若无法获取新内存块，则必须执行垃圾回收</p>
+<h2 id="160-160-160-标记-清扫回收器需要考虑的问题："><a href="#160-160-160-标记-清扫回收器需要考虑的问题：" class="headerlink" title="&#160;&#160; &#160;标记-清扫回收器需要考虑的问题："></a>&#160;&#160; &#160;标记-清扫回收器需要考虑的问题：</h2><p>&#160;&#160; &#160;1.赋值器的开销：最简单的标记-清扫回收器不会给赋值器带来任何额外的读写开销，相比之下，引用计数器会带来显著的开销。分代回收器，并发回收器，增量回收器都要求赋值器在修改指针时通知回收器，但对于程序的整体执行时间而言，这部分的开销通常较小。<br>&#160;&#160; &#160;2.使用懒惰清扫策略的回收器通常有较高的吞吐量，主要开销在于追踪阶段。对于已发现的垃圾对象，只需要设置一个标记位。相比之下，复制算法和标记-整理算法则还需要移动对象。<br>&#160;&#160; &#160;3.空间利用率：如果将标记位放在对象头部，则不会产生额外的开销。如果使用位图，则额外空间取决于对象的字节要求，如要求32字节对齐，则总开销不会超过堆内存的1/32或1/64(一个32字节的对象用一个字节来标记，所以总占用空间是所有对象大小的1/32，也就是堆内存的1/32)。而复制式算法的利用率则较低。但非整理式回收器（如标记-清理）通常都会存在内存碎片，这对空间利用率也会造成一定的影响。<br>和其他追踪式回收算法一样，标记-清扫算法需要在回收所有死亡对象空间之前先确定所有的存活对象。这意味着追踪式回收器需要保留一定的空间来执行这项操作。若堆中存活对象较多，且分配速率较快，则会引起频繁的垃圾回收操作。对于中大型的堆，需要保留20%~50%的空间。<br>&#160;&#160; &#160;4.移动还是不移动。非移动算法的优点在于，不移动对象的特征使得标记-清扫算法可以用于 那些编译器和回收器不合作的场景。回收器无法获取到赋值器根集合和对象域的详细信息，所以不能随便移动对象。同时，出于安全考虑，在不合作的系统中保守式的回收器不能修改用户数据，包括对象头，所以用位图进行标记要比在对象头进行标记更好。但非移动算法的主要问题在于随着回收进行会产生内存碎片，所以会比整理式算法的回收频率更高。也需要保留20%~50%的空间，避免性能颠簸。因为会产生内存碎片，所以许多标记-清扫算法还会定期使用标记-整理算法进行内存整理。</p>
+<p>##总结：##<br>总结起来，标记-清扫分为标记和清扫2个过程，回收过程不会移动对象，因此容易产生内存碎片。针对2个过程，分别有优化的方法。标记过程的优化可以采用位图（字节图）进行标记的方法。清扫过程的优化可以采用懒惰清扫的策略。</p>
 
       
     </div>
@@ -382,8 +403,6 @@
           
             <a href="/tags/reading/" rel="tag">#reading</a>
           
-            <a href="/tags/Java/" rel="tag">#Java</a>
-          
             <a href="/tags/JVM/" rel="tag">#JVM</a>
           
         </div>
@@ -393,17 +412,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/25/如何给身份证号码打码/" rel="next" title="如何给身份证号码打码">
-                <i class="fa fa-chevron-left"></i> 如何给身份证号码打码
+              <a href="/2017/04/04/4段代码了解Java虚拟机虚方法和非虚方法的分派/" rel="next" title="4段代码了解Java虚拟机虚方法和非虚方法的分派">
+                <i class="fa fa-chevron-left"></i> 4段代码了解Java虚拟机虚方法和非虚方法的分派
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/04/4段代码了解Java虚拟机虚方法和非虚方法的分派/" rel="prev" title="4段代码了解Java虚拟机虚方法和非虚方法的分派">
-                4段代码了解Java虚拟机虚方法和非虚方法的分派 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -429,8 +444,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/01/一张图看懂java中的垃圾收集器/"
-           data-title="一张图看懂java中的垃圾收集器" data-url="http://FlashLightNing.github.io/2017/04/01/一张图看懂java中的垃圾收集器/">
+      <div class="ds-thread" data-thread-key="2017/05/20/深入了解标记-清扫回收算法/"
+           data-title="'深入了解标记-清扫回收算法'" data-url="http://FlashLightNing.github.io/2017/05/20/深入了解标记-清扫回收算法/">
       </div>
     
   </div>
@@ -539,7 +554,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">1.</span> <span class="nav-text">垃圾收集算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集器"><span class="nav-number">2.</span> <span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CMS收集器"><span class="nav-number">2.1.</span> <span class="nav-text">CMS收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#G1收集器"><span class="nav-number">2.2.</span> <span class="nav-text">G1收集器</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-清扫回收器要求堆布局满足一定的条件："><span class="nav-number">1.</span> <span class="nav-text">标记-清扫回收器要求堆布局满足一定的条件：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#160-160-160-2-如何改进标记–清楚算法："><span class="nav-number"></span> <span class="nav-text">    2.如何改进标记–清楚算法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#160-160-160-1-位图标记"><span class="nav-number">1.</span> <span class="nav-text">    1.位图标记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#160-160-160-位图标记的优点："><span class="nav-number">2.</span> <span class="nav-text">    位图标记的优点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#160-160-160-2-懒惰清扫"><span class="nav-number">3.</span> <span class="nav-text">    2.懒惰清扫</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#160-160-160-标记-清扫回收器需要考虑的问题："><span class="nav-number"></span> <span class="nav-text">    标记-清扫回收器需要考虑的问题：</span></a></div>
             
           </div>
         </section>

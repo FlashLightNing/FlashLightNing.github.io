@@ -4,6 +4,31 @@
 
     
   <url>
+    <loc>http://FlashLightNing.github.io/2017/05/20/%E6%B7%B1%E5%85%A5%E4%BA%86%E8%A7%A3%E6%A0%87%E8%AE%B0-%E6%B8%85%E6%89%AB%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2017-05-20T02:39:13.854Z</lastmod>
+    <data>
+        <display>
+        <title>'深入了解标记-清扫回收算法'</title>
+        <pubTime>2017-05-20T02:20:52.000Z</pubTime>
+        
+        <tag>reading</tag>
+         
+        <tag>JVM</tag>
+         
+         
+           
+             
+              <breadCrumb title="JVM" url="http://FlashLightNing.github.io/categories/JVM/"/>
+          
+             
+              <breadCrumb title="reading" url="http://FlashLightNing.github.io/categories/JVM/reading/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://FlashLightNing.github.io/2017/04/01/%E4%B8%80%E5%BC%A0%E5%9B%BE%E7%9C%8B%E6%87%82java%E4%B8%AD%E7%9A%84%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/</loc>
     <lastmod>2017-04-08T15:33:35.660Z</lastmod>
     <data>
@@ -280,9 +305,9 @@
         <title>细数JDK里的设计模式</title>
         <pubTime>2016-04-26T15:02:04.000Z</pubTime>
         
-        <tag>java</tag>
-         
         <tag>design-patterns</tag>
+         
+        <tag>java</tag>
          
          
            
